@@ -1,20 +1,12 @@
-import { CREATE_BOOK, REMOVE_BOOK, CHANGE_FILTER } from '../helpers/help';
+import { UPDATE_USERAPI_DETAILS } from '../helpers/help';
 
-const addBook = book => ({
-  type: CREATE_BOOK,
-  id: book.id,
-  title: book.title,
-  category: book.category,
-});
 
-const removeBook = book => ({
-  type: REMOVE_BOOK,
-  id: book.id,
-});
 
-const changeFilter = filter => ({
-  type: CHANGE_FILTER,
-  filter,
-});
+const  updateuserDetails = userApi => ({
+  type: UPDATE_USERAPI_DETAILS,
+  userApi
+})
 
-export { addBook, removeBook, changeFilter };
+
+
+export {  updateuserDetails };

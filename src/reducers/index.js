@@ -1,13 +1,6 @@
 import { combineReducers } from 'redux';
-import books from './books';
-import filter from './filter';
-// rootReducer
-/*
-const rootReducer = combineReducers({
-    books,
-});
- */
+import userApi from './userApi';
+
 export default combineReducers({
-  books,
-  filter,
+  userApi
 });
