@@ -4,5 +4,11 @@
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  font-family: "Muli","Helvetica","Arial",sans-serif 
 }
 
+
+:root {
+  --torreGreenIsh: #cddc39;
+  --torreChalkBoard:  rgba(255,255,255,.65);
+}

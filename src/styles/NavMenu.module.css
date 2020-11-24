@@ -1,0 +1,56 @@
+.navMenuContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #27292D !important;
+}
+
+.menuLeft,
+.menuRight{
+    width: 50%;
+    margin: 10px 15px 10px 15px;
+    display: flex;
+    align-items: center;
+}
+
+.menuLeft{
+    justify-content: flex-start;
+}
+
+.menuRight{
+    justify-content: flex-end;
+}
+
+.menuBox{
+    padding: 0 12px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuBox p {
+    margin-top: 5px;
+    font-size: 10px;
+    line-height: 11px;
+    color: var(--torreChalkBoard);
+}
+
+.brand {
+    margin-left: 30px;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--torreChalkBoard);
+    letter-spacing: normal;
+}
+
+.menuIcon {
+    color: var(--torreChalkBoard);
+}
+
+.signInButton span {
+    padding: 0px;
+    font-size: 14px;
+    font-weight: 200;
+    color: var(--torreGreenIsh);
+}

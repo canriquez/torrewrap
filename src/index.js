@@ -6,6 +6,7 @@ import App from './containers/App';
 import rootReducer from './reducers/index';
 import './index.css';
 import thunk from 'redux-thunk';
+import 'fontsource-roboto';
 
 const store = createStore(
   rootReducer,
