@@ -1,11 +1,14 @@
 import 'regenerator-runtime';
 
 const fetchTorreUserBio = async ({public_id}) => {
-
-    const baseUrl = ' https://torre.bio'; //Provided bio endpoint
+    console.log('I am at API torre');
+    console.log({public_id})
+    const baseUrl = 'https://bio.torre.co'; //Provided bio endpoint
     const endpoint = '/api/bios/';
-    const a = `?username=${public_id}`;
+    const a = `${public_id}`;
     const appURL = [baseUrl + endpoint + a ];
+
+    console.log(appURL)
 
     const request = {
       method: 'GET',
@@ -16,7 +19,10 @@ const fetchTorreUserBio = async ({public_id}) => {
     };
     try {
       const response = await fetch(appURL, request);
+      console.log(response)
       const obj = await response.json();
+
+      //console.log({obj})
   
       // return complete list
       return obj;
@@ -25,4 +31,4 @@ const fetchTorreUserBio = async ({public_id}) => {
     }
   };
 
-  export { fetchTorreUserBio  };
+  export { fetchTorreUserBio };
