@@ -1,25 +1,38 @@
-![](https://img.shields.io/badge/Microverse-blueviolet)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f8b04914-d351-4d35-b0c2-496bea129353/deploy-status)](https://app.netlify.com/sites/torrewrap/deploys)
 
-# React Redux Bookstore App
+# TorreWrap - Full Stack Application
 
-> React/Redux Project to build the front-end of an application to organize and manage a small bookstore.
+> From-end application that uses API information from the site Torre.co. This application uses a Ruby on Rails [backend repository](https://github.com/canriquez/torrewrap-api) to hit Torre.co API endpoints for the required data.
 
-<img src='./app_usage.gif' width='50%'/>
+## Current User Story
+
+> The user can login into the torreWrap backend using a valid TorreCo user:
+
+- Currently ony works with user: canriquez
+
+> When the user enters the Torre.co username, the app will check the username validity using the torreWrap-API end point.
+> The torreWrap-API will hit the Torre.co API to fech the required user. If this operation fails, then the front end will not progress until a valid user is submitted.
+> After a valid user is provided (canriquez), the app will profide the form to enter the password.
+> A valid TorreWrap-API password must be provided. Currently the only user stored in TorreWrap-API has the password
+
+`12345`
+
+> When the correct password is submitted, the home page is rendered using Torre.co API information
+
+<img src='./torreWrap.png' />
 
 # Additional description about the project and its features.
 
 ## Built With
 
-- React.js, Webpack, Babel
+- React.js, CRA, Webpack, Babel
 - HTML5/CSS3, Javascript ES6
 - ESlint, Stylelint
 - VSCode
 
-
 ## Live Demo @Heroku
 
-[Live Demo Link](https://rdx-bookstore.herokuapp.com)
-
+[Live Demo Link](https://torrewrap.netlify.app/)
 
 ## Getting Started
 
@@ -27,9 +40,10 @@ To get a local copy up and running, follow these simple steps.
 
 Clone or fork the [repo](https://github.com/canriquez/redux-bookstore.git)
 
-*note you need have install npm or yarn.
-* [npm](https://www.npmjs.com/get-npm)
-* [yarn](https://classic.yarnpkg.com/en/docs/install)
+\*note you need have install npm or yarn.
+
+- [npm](https://www.npmjs.com/get-npm)
+- [yarn](https://classic.yarnpkg.com/en/docs/install)
 
 ## How it Works
 
@@ -55,39 +69,21 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-
-### Usage
-
-You are provided with a set of booklist to init the app. You are free to delete them and add your new preferred ones. Add as many as you like with the form provided on the footer setting a title and a book category. 
-
-Once you have all of your books set on the list, you can filter them with the navbar category selector.
-
-Refresh to get your app to init again.
-
-
 ### Run tests
 
-*   Run the test suite app for store actions with
-    ```
-    $ npm test
-    ```
-
+- Run the test suite app for store actions with
+  ```
+  $ npm test
+  ```
 
 ## Authors
 
-👤 ***Carlos Anriquez***
+👤 **_Carlos Anriquez_**
 
 - Github: [@canriquez](https://github.com/canriquez)
 - Twitter: [@cranriquez](https://twitter.com/cranriquez)
 - Linkedin: [linkedin](https://www.linkedin.com/in/carlosanriquez/)
 - Portfolio: [carlosanriquez.com](https://www.carlosanriquez.com)
-
-👤 ***Ricardo Valtierra***
-
-- Github: [@ricardovaltierra](https://github.com/ricardovaltierra)
-- Twitter: [@RicardoValtie15](https://twitter.com/RicardoValtie15)
-- Linkedin: [ricardovaltierra.com](https://www.linkedin.com/in/ricardovaltierra/)
-
 
 ## 🤝 Contributing
 
@@ -101,7 +97,6 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-@microverseinc
 Family and friends!
 
 ## 📝 License
