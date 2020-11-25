@@ -3,16 +3,21 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavMenu  from '../components/NavMenu'
 import SignIn from './SignIn.js'
+import YourAccount from './YourAccount';
 
 
-const App = () => {
+const App = ({
+  userTorre,
+}) => {
   return (
     <div className="panel">
       <Router>
         <NavMenu />
         <Switch>
           <Route exact path="/">
-            <p>This is Root</p>
+            {userTorre.signedIn ? 
+              <YourAccount />
+            : ''}
           </Route>
           <Route path="/signin">
             <SignIn />
@@ -23,5 +28,9 @@ const App = () => {
   );
 };
 
+const mapStateToProps = state => ({
+  userTorre: state.userTorre,
+});
+
 // export default App;
-export default connect(null, null)(App);
+export default connect(mapStateToProps, null)(App);

@@ -13,9 +13,16 @@ const store = createStore(
   applyMiddleware(thunk),
 );
 
+const Main = () => {
+  React.useEffect(() => {
+    document.title = 'Torre Wrap';
+  });
+  return <App />;
+};
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Main />
   </Provider>,
   document.getElementById('root'),
 );
