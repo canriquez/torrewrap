@@ -6,9 +6,9 @@ it('test updates userDetails in full', () => {
   const stateBefore = {};
 
   const userDetails = {
-    id:10, 
+    id: 10,
     name: 'pablo',
-  }
+  };
 
   const stateAfter = userDetails;
 
