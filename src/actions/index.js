@@ -1,5 +1,4 @@
-import { UPDATE_USERAPI_DETAILS } from '../helpers/help';
-
+import { UPDATE_USERAPI_DETAILS, UPDATE_USERTORRE_DETAILS } from '../helpers/help';
 
 
 const  updateuserDetails = userApi => ({
@@ -7,6 +6,11 @@ const  updateuserDetails = userApi => ({
   userApi
 })
 
+const updateTorreUserDetails = userTorre => ({
+  type: UPDATE_USERTORRE_DETAILS,
+  userTorre
+})
 
 
-export {  updateuserDetails };
+
+export {  updateuserDetails, updateTorreUserDetails };
