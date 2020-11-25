@@ -128,6 +128,39 @@ const signInWarpUser = async ({ public_id, password }) => {
   }
 };
 
+const signUpTorreUserApi = async ({ public_id, password }) => {
+  console.log('I am at API Wrap User');
+  console.log({ public_id });
+  const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  const endpoint = '/signup?';
+  const a = `public_id=${public_id}`;
+  const b = `&password=${password}`;
+  const c = `&picture_thumbnail=http`
+  const appURL = [baseUrl + endpoint + a + b + c];
+
+  console.log(appURL);
+
+  const request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const response = await fetch(appURL, request);
+    console.log(response);
+    const obj = await response.json();
+
+    console.log({ obj });
+
+    // return complete list
+    return obj;
+  } catch (err) {
+    throw ('Something went wrong with fetching user bio from torre.bio API ', err);
+  }
+};
+
 export {
-  signUpTorreWrapApi, checkValidTorreUser, checkValidWrapUser, signInWarpUser,
+  signUpTorreWrapApi, checkValidTorreUser, checkValidWrapUser, signInWarpUser, signUpTorreUserApi
 };

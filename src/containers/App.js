@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import NavMenu from '../components/NavMenu';
 import SignIn from './SignIn.js';
 import YourAccount from './YourAccount';
@@ -20,6 +20,7 @@ const App = ({
         <Route path="/signin">
           <SignIn />
         </Route>
+        <Route path={'/*'} render={() => <Redirect to="/" />} />
       </Switch>
     </Router>
   </div>
