@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import PersonIcon from '@material-ui/icons/Person';
-import { ThemeProvider } from '@material-ui/core/styles';
 import styles from '../styles/YourAccount.module.css';
 import BootstrapButton from '../components/BootstrapButton';
 
@@ -42,7 +37,7 @@ const YourAccount = ({
         </div>
         <div className={styles.buttonWrap}>
           <BootstrapButton href="#contained-buttons" className={styles.editButton} component={RouterLink} to="/">
-            SIGN IN
+            EDIT
           </BootstrapButton>
         </div>
 

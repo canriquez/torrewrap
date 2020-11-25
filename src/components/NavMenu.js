@@ -8,7 +8,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import styles from '../styles/NavMenu.module.css';
 import { updateTorreUserDetails } from '../actions/index';
 import { USER_RECORD } from '../helpers/help';
-import YourAccount from '../containers/YourAccount';
 
 const NavMenu = ({
   userTorre,
@@ -31,6 +30,14 @@ const NavMenu = ({
     if (window.localStorage.getItem(USER_RECORD)) window.localStorage.removeItem(USER_RECORD);
     updateUserTorreData({
       signedIn: false,
+      inWrapDB: false,
+      torre_data: {},
+      user_id: null,
+      user_name: '',
+      picture_thumbnail: '',
+      public_id: '',
+      valid: false,
+  
     });
   };
 

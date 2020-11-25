@@ -8,6 +8,7 @@ const state_default = {
   signedIn: false,
   valid: false,
   inWrapDB: false,
+  createUser:'',
   persona: {},
 };
 

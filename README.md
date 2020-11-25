@@ -30,7 +30,7 @@
 - ESlint, Stylelint
 - VSCode
 
-## Live Demo @Heroku
+## Live Demo @Netlify
 
 [Live Demo Link](https://torrewrap.netlify.app/)
 
