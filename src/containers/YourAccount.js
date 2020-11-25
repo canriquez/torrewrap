@@ -6,12 +6,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
 import styles from '../styles/YourAccount.module.css'
+import { ThemeProvider } from '@material-ui/core/styles';
+import BootstrapButton from '../components/BootstrapButton'
+
 
 
 
 const YourAccount = ({
     userTorre,
 }) => {
+
 
   return (
         <div className={styles.yourAccount}>
@@ -27,6 +31,10 @@ const YourAccount = ({
                         <p>{userTorre.user_name}</p>
                     </div>
                     <div className={styles.dataRow}>
+                        <div className={styles.itemName}>Your username*</div>
+                        <p>{userTorre.public_id}</p>
+                    </div>
+                    <div className={styles.dataRow}>
                         <div className={styles.itemName}>Your professional headline*</div>
                         <p>{userTorre.torre_data.professionalHeadline}</p>
                     </div>
@@ -38,6 +46,12 @@ const YourAccount = ({
                         <div className={styles.itemName}>Your bio summary*</div>
                         <p>{userTorre.torre_data.summaryOfBio}</p>
                     </div>
+                    <div className={styles.buttonWrap}>
+                        <BootstrapButton href="#contained-buttons"className={styles.editButton} component={RouterLink} to="/">
+                            SIGN IN
+                        </BootstrapButton>
+                    </div>
+
                 </div>
             </div>      
         </div>

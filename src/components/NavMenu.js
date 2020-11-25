@@ -17,7 +17,8 @@ const NavMenu = ({
 }) => {
 
     useEffect(()=>{
-        if (window.localStorage.getItem(USER_RECORD))
+        
+        if (window.localStorage.hasOwnProperty(USER_RECORD) ) {
             console.log('YES, WE ARE LOGGED IN')
             const user_data = JSON.parse(window.localStorage.getItem(USER_RECORD));
             user_data.torre_data = JSON.parse(user_data.torre_data)
@@ -26,7 +27,16 @@ const NavMenu = ({
                 signedIn: true,
                 ...user_data
             })
+        }
     }, [userTorre.signedIn, updateUserTorreData])
+
+    const logOff = ()=>{
+        if (window.localStorage.getItem(USER_RECORD))
+            window.localStorage.removeItem(USER_RECORD);
+        updateUserTorreData({
+                signedIn: false
+            })
+    };
 
   return (
         <div className={styles.navMenuContainer}>
@@ -45,7 +55,7 @@ const NavMenu = ({
                     <p>Your genome</p>
                 </div>
                     {userTorre.signedIn ? 
-                    <div className={styles.exagonPicture}>
+                    <div onClick={logOff} className={styles.exagonPicture}>
                         <div className={styles.exagonBorder}></div>
                         <img src={userTorre.picture_thumbnail} className={styles.userPicture} alt="Avatar"/>
                     </div>
