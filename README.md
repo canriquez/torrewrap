@@ -6,14 +6,14 @@
 
 ## Current User Story
 
-> The user can login into the torreWrap backend using a valid TorreCo user:
+> The user can log in into the torreWrap backend using a valid TorreCo user:
 
-- Currently ony works with user: canriquez
+- Currently only works with user: canriquez
 
-> When the user enters the Torre.co username, the app will check the username validity using the torreWrap-API end point.
-> The torreWrap-API will hit the Torre.co API to fech the required user. If this operation fails, then the front end will not progress until a valid user is submitted.
-> After a valid user is provided (canriquez), the app will profide the form to enter the password.
-> A valid TorreWrap-API password must be provided. Currently the only user stored in TorreWrap-API has the password
+> When the user enters the Torre.co username, the app will check the username validity using the torreWrap-API endpoint.
+> The torreWrap-API will hit the Torre.co API to fetch the required user. If this operation fails, then the front end will not progress until a valid user is submitted.
+> After a valid user is provided (canriquez), the app will provide the form to enter the password.
+> A valid TorreWrap-API password must be provided. Currently, the only user stored in TorreWrap-API has the password.
 
 `12345`
 
@@ -40,7 +40,7 @@ To get a local copy up and running, follow these simple steps.
 
 Clone or fork the [repo](https://github.com/canriquez/redux-bookstore.git)
 
-\*note you need have install npm or yarn.
+\*note you have to install npm or yarn.
 
 - [npm](https://www.npmjs.com/get-npm)
 - [yarn](https://classic.yarnpkg.com/en/docs/install)
