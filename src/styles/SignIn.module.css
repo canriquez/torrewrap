@@ -1,0 +1,110 @@
+.signIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+}
+
+.header {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: left;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  font-weight: 100;
+  padding: 20px;
+  height: 56px;
+  background-color: #27292d;
+  color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.profileWindow {
+  background-color: black;
+  height: 80vh;
+  overflow: auto;
+}
+
+.profileWrap {
+  padding: 22px 16px 16px;
+  width: 400px;
+  background-color: #27292d;
+}
+
+.profileWrap label {
+  font-size: 14px;
+  font-weight: 100;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.torreUserInputWrap {
+  display: flex;
+  justify-content: center;
+}
+
+.profileWrap input {
+  height: 25px;
+  width: 75%;
+  border: 1px solid white;
+  background-color: #27292d;
+  color: white;
+  padding: 0 5px;
+  margin-top: 40px;
+  text-align: right;
+}
+
+.profileWrap input:focus {
+  background-color: #27292d;
+}
+
+.headingRow {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 26px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.userPicture {
+  display: flex;
+  justify-content: center;
+}
+
+.userPicture img {
+  margin: 20px 0;
+  border-radius: 100%;
+  height: 150px;
+  width: 150px;
+}
+
+.dataRow {
+  margin: 20px 0;
+}
+
+.dataRow .itemName {
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 18px;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dataRow p {
+  height: 36px;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 4px 0;
+}
+
+.buttonWrap {
+  display: flex;
+  justify-content: flex-end;
+  margin: 45px 0;
+}
+
+.editButton {
+  color: rgb(204, 220, 57);
+}

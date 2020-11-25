@@ -1,20 +1,107 @@
-import { CREATE_BOOK, REMOVE_BOOK, CHANGE_FILTER } from '../helpers/help';
+import { UPDATE_USERAPI_DETAILS, UPDATE_USERTORRE_DETAILS, USER_RECORD } from '../helpers/help';
+import {fetchTorreUserBio } from '../apis/TorreCoApi'
+import {checkValidTorreUser, checkValidWrapUser, signInWarpUser} from '../apis/TorreWrapApi'
 
-const addBook = book => ({
-  type: CREATE_BOOK,
-  id: book.id,
-  title: book.title,
-  category: book.category,
-});
 
-const removeBook = book => ({
-  type: REMOVE_BOOK,
-  id: book.id,
-});
+const  updateuserDetails = userApi => ({
+  type: UPDATE_USERAPI_DETAILS,
+  userApi
+})
 
-const changeFilter = filter => ({
-  type: CHANGE_FILTER,
-  filter,
-});
+const updateTorreUserDetails = userTorre => ({
+  type: UPDATE_USERTORRE_DETAILS,
+  userTorre
+})
 
-export { addBook, removeBook, changeFilter };
+
+
+const validatesTorreUserApi = (userTorre) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({fetching: 'busy'}))
+  return checkValidTorreUser(
+  {public_id: userTorre},
+)
+  .then(result => {
+    dispatch(updateTorreUserDetails({fetching: 'idle'}))
+    if (result.message == 'Valid Torre.co User')
+      dispatch(updateTorreUserDetails({
+        valid: true,
+        errors: [],
+      }));
+    else
+      dispatch(updateTorreUserDetails({
+        valid: false,
+        errors: [result.error],
+      }));
+    
+  }).catch(error => {
+    dispatch(updateTorreUserDetails({valid: false}));
+    throw (error);
+  });
+}
+
+
+const validatesWrapUserApi = (userTorre) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({fetching: 'busy'}))
+  return checkValidWrapUser(
+  {public_id: userTorre},
+)
+  .then(result => {
+    dispatch(updateTorreUserDetails({fetching: 'idle'}))
+    if (result.message == 'Valid TorreWrap User')
+      dispatch(updateTorreUserDetails({
+        inWrapDB: true,
+        errors: [],
+      }));
+    else
+      dispatch(updateTorreUserDetails({
+        inWrapDB: false,
+        errors: [result.error]
+      }));
+    
+  }).catch(error => {
+    dispatch(updateTorreUserDetails({
+      inWrapDB: false,
+    }));
+    throw (error);
+  });
+}
+
+const signInWrapUserApi = (userTorre, password) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({fetching: 'busy'}))
+  return signInWarpUser(
+  {
+    public_id: userTorre,
+    password: password
+  },
+  )
+  .then(result => {
+    dispatch(updateTorreUserDetails({fetching: 'idle'}))
+    if (result.user_id) {
+      localStorage.setItem(USER_RECORD, JSON.stringify(result));
+      dispatch(updateTorreUserDetails({
+        signedIn: true,
+        errors: [],
+        ...result,
+      }));
+    }
+    else
+      dispatch(updateTorreUserDetails({
+        signedIn: false,
+        errors: [result.message]
+      }));
+    
+  }).catch(error => {
+    dispatch(updateTorreUserDetails({signedIn: false}));
+    throw (error);
+  });
+}
+
+
+
+export {  
+  updateuserDetails, 
+  updateTorreUserDetails,
+  validatesTorreUserApi,
+  validatesWrapUserApi,
+  signInWrapUserApi,
+ };
