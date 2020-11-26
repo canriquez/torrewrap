@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import NavMenu from '../components/NavMenu';
 import SignIn from './SignIn.js';
 import YourAccount from './YourAccount';
+import styles from '../styles/App.module.css';
 
 const App = ({
   userTorre,
 }) => (
-  <div className="panel">
+  <div className={styles.panel}>
     <Router>
       <NavMenu />
       <Switch>
