@@ -25,7 +25,7 @@ The user login or create an account at torreWrap, using Torre.co valid user name
 ### Creating a new torreWrap account using `any` Torre.co valid user account
 - When the user enters a Torre.co username, the app will check the username validity using the torreWrap-API endpoint.
 - The torreWrap-API will hit the Torre.co API to fetch the required user. If this operation fails, then the front end will not progress until a valid user is submitted.
-- After a valid '''any''' valid Torre.co user is provided, the app will invite the user to add a password to create the new torreWrap account. 
+- After providing `any` valid Torre.co user, the app will invite the user to add a password to create the new torreWrap account. 
 - After the signup process is done, the app will show the current Torre.co profile information.
 
 <img src='./torreWrap.png' />
