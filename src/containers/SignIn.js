@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import styles from '../styles/SignIn.module.css';
 import { validatesTorreUserApi, validatesWrapUserApi, signInWrapUserApi, signUpTorreUser, updateTorreUserDetails } from '../actions/index';
 import BootstrapButton from '../components/BootstrapButton';
+import Spinner from '../components/Spinner'
 
 
 const SignIn = ({
@@ -85,6 +86,7 @@ const SignIn = ({
             <BootstrapButton onClick={handleTorreUserCheck} href="#contained-buttons" className={styles.signInButton}>
               Continue
             </BootstrapButton>
+            {userTorre.fetching=='busy' ? <Spinner /> : ''}
           </div>
         </div>
       </div>
@@ -124,6 +126,7 @@ const SignIn = ({
             <BootstrapButton onClick={handleBack} href="#contained-buttons" className={styles.backButton}>
               Back
             </BootstrapButton>
+            {userTorre.fetching=='busy' ? <Spinner poss="spinCentered" /> : '' }
             <BootstrapButton onClick={handleSignUp} href="#contained-buttons" className={styles.signInButton}>
               Signup
             </BootstrapButton>
@@ -155,6 +158,7 @@ const SignIn = ({
             <BootstrapButton onClick={handleSignIn} href="#contained-buttons" className={styles.signInButton}>
               SIGN IN
             </BootstrapButton>
+            {userTorre.fetching=='busy' ? <Spinner /> : ''}
           </div>
         </div>
       </div>
