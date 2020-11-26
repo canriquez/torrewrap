@@ -38,7 +38,7 @@
 
 To get a local copy up and running, follow these simple steps.
 
-Clone or fork the [repo](https://github.com/canriquez/redux-bookstore.git)
+Clone or fork the [repo](https://github.com/canriquez/torrewrap.git)
 
 \*note you have to install npm or yarn.
 
