@@ -6,18 +6,27 @@
 
 ## Current User Story
 
+The user login or create an account at torreWrap, using Torre.co valid user name. This torreWrap user will then fetch profile information from Torre.co and show additional functionalities on top of the existing Torre.co features. Currently, two main functions are working:
+
+### Getting torreWrap access using an existing account
 > The user can log in into the torreWrap backend using a valid TorreCo user:
 
-- Currently only works with user: canriquez
+- Currently, example works with user: canriquez
 
 > When the user enters the Torre.co username, the app will check the username validity using the torreWrap-API endpoint.
 > The torreWrap-API will hit the Torre.co API to fetch the required user. If this operation fails, then the front end will not progress until a valid user is submitted.
-> After a valid user is provided (canriquez), the app will provide the form to enter the password.
-> A valid TorreWrap-API password must be provided. Currently, the only user stored in TorreWrap-API has the password.
+> After a valid user is provided (canriquez), the app will show the form to enter the password.
+> The user must provide a valid TorreWrap-API password. Currently, the only user stored in TorreWrap-API has the password.
 
 `12345`
 
-> When the correct password is submitted, the home page is rendered using Torre.co API information
+> When the correct password is submitted, the home page will be rendered using Torre.co API information
+
+### Creating a new torreWrap account using '''any''' Torre.co valid user account
+> When the user enters a Torre.co username, the app will check the username validity using the torreWrap-API endpoint.
+> The torreWrap-API will hit the Torre.co API to fetch the required user. If this operation fails, then the front end will not progress until a valid user is submitted.
+> After a valid '''any''' valid Torre.co user is provided, the app will invite the user to add a password to create the new torreWrap account. 
+> After the signup process is done, the app will show the current Torre.co profile information.
 
 <img src='./torreWrap.png' />
 
@@ -27,6 +36,7 @@
 
 - React.js, CRA, Webpack, Babel
 - HTML5/CSS3, Javascript ES6
+- material-ui
 - ESlint, Stylelint
 - VSCode
 
