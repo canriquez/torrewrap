@@ -1,5 +1,11 @@
 import { UPDATE_USERAPI_DETAILS, UPDATE_USERTORRE_DETAILS, USER_RECORD } from '../helpers/help';
-import { checkValidTorreUser, checkValidWrapUser, signInWarpUser, signUpTorreUserApi } from '../apis/TorreWrapApi';
+import { 
+  checkValidTorreUser, 
+  checkValidWrapUser, 
+  signInWarpUser, 
+  signUpTorreUserApi, 
+  storeProfilePictureApi, 
+} from '../apis/TorreWrapApi';
 
 const updateuserDetails = userApi => ({
   type: UPDATE_USERAPI_DETAILS,
@@ -121,6 +127,21 @@ const signUpTorreUser = (userTorre, password) => (dispatch, getState) => {
     });
 };
 
+const pushProfilePicture = (imageObject) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({ uploading: 'busy' }));
+  return storeProfilePictureApi(imageObject)
+    .then(result => {
+      dispatch(updateTorreUserDetails({ 
+        uploading: 'idle',
+        picture_thumbnail: result.image.cloud_url
+      }));
+
+    }).catch(error => {
+      dispatch(updateTorreUserDetails({ uploading: 'error' }));
+      throw (error);
+    });
+};
+
 export {
   updateuserDetails,
   updateTorreUserDetails,
@@ -128,4 +149,5 @@ export {
   validatesWrapUserApi,
   signInWrapUserApi,
   signUpTorreUser,
+  pushProfilePicture,
 };

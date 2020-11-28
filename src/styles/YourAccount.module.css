@@ -81,3 +81,10 @@
 .editButton {
   color: rgb(204, 220, 57);
 }
+
+
+/* Video Capture Window */
+.webcam {
+  width: 100%;
+  height: 100%;
+}

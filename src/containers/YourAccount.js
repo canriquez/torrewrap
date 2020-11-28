@@ -1,12 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import styles from '../styles/YourAccount.module.css';
 import BootstrapButton from '../components/BootstrapButton';
+import Webcam from 'react-webcam'
+import { pushProfilePicture } from '../actions/index'
 
 const YourAccount = ({
   userTorre,
-}) => (
+  storeProfilePicture,
+}) => {
+
+  const videoConstraints = {
+    width: 1024,
+    height: 768,
+    facingMode: "user"
+  };
+
+  const webcamRef = React.useRef(null);
+   
+  const capture = useCallback(() => {
+        const imageSrc = webcamRef.current.getScreenshot();
+        console.log({imageSrc});
+        storeProfilePicture({
+          user:userTorre.user_id, 
+          auth:userTorre.user_id,
+          asset_type: 'image',
+          payload: imageSrc 
+        })
+      },
+      [webcamRef]
+    );
+  
+  return (
   <div className={styles.yourAccount}>
     <div className={styles.header}>Your account</div>
     <div className={styles.profileWindow}>
@@ -15,6 +41,19 @@ const YourAccount = ({
         <div className={styles.userPicture}>
           <img src={userTorre.picture_thumbnail} alt="userThumbnail" />
         </div>
+
+        <div className={styles.webcamWrap}>
+          <Webcam className={styles.webcam}
+          audio={false}
+          height={720}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          width={1280}
+          videoConstraints={videoConstraints}
+        />
+          <button onClick={capture}>Capture photo</button>
+        </div>
+
         <div className={styles.dataRow}>
           <div className={styles.itemName}>Your full name*</div>
           <p>{userTorre.user_name}</p>
@@ -45,9 +84,16 @@ const YourAccount = ({
     </div>
   </div>
 );
-
+}
 const mapStateToProps = state => ({
   userTorre: state.userTorre,
 });
 
-export default connect(mapStateToProps, null)(YourAccount);
+const mapDispatchToProps = dispach => ({
+  storeProfilePicture: imgObj => {
+    dispach(pushProfilePicture(imgObj));
+  },
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(YourAccount);
