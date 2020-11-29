@@ -21,8 +21,15 @@ const useStyles = makeStyles((theme) => ({
 
 const UploadImageButtons =({
     handleUploadClick,
+    handleCapturePicture,
+    handleDeletePicture
 })=> {
     const classes = useStyles();
+
+
+const deletePicture=()=>{
+    handleDeletePicture("https://anri-img-storage.s3.amazonaws.com/avatar/empty.png")
+}
 
 
     return (
@@ -42,12 +49,12 @@ const UploadImageButtons =({
                     </IconButton>
                 </label>
                 <label htmlFor="icon-button-delete">
-                    <IconButton color="primary" aria-label="upload picture" component="span">
+                    <IconButton color="primary" onClick={handleCapturePicture} aria-label="upload picture" component="span">
                         <PhotoCamera caption="add new picture from file" />
                     </IconButton>
                 </label>
                 <label htmlFor="icon-button-delete">
-                    <IconButton color="primary" aria-label="upload picture" component="span">
+                    <IconButton color="primary" onClick={deletePicture} aria-label="upload picture" component="span">
                         <DeleteForeverIcon caption="add new picture from file" />
                     </IconButton>
                 </label>

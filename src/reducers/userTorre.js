@@ -5,6 +5,7 @@ import {
 const state_default = {
   errors: [],
   fetching: 'idle',
+  uploading: 'idle',
   signedIn: false,
   valid: false,
   inWrapDB: false,
