@@ -1,22 +1,34 @@
 import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import styles from '../styles/YourAccount.module.css';
+import styles from '../styles/VideoProfile.module.css';
 import BootstrapButton from '../components/BootstrapButton';
 import Webcam from 'react-webcam'
 import { pushProfileAsset } from '../actions/index'
 import { blobToBase64 } from '../helpers/componentHelp';
+import VideoPlayer from '../components/VideoPlayer';
+
 
 const VideoProfile = ({
   userTorre,
   storeProfileVideo,
 }) => {
+    const {video_url} = userTorre
     const webcamRef = React.useRef(null);
     const mediaRecorderRef = React.useRef(null);
+    const [profileVideoUrl, setProfileVideoUrl] = React.useState('');
     const [capturing, setCapturing] = React.useState(false);
     const [recordedChunks, setRecordedChunks] = React.useState([]);
+
+
+    useEffect(()=>{
+      if (video_url != ''){
+        setProfileVideoUrl(video_url)
+      }
+
+    },[video_url])
   
-    const handleStartCaptureClick = React.useCallback(() => {
+    const handleStartCaptureClick = useCallback(() => {
       setCapturing(true);
       mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
         mimeType: "video/webm"
@@ -28,7 +40,7 @@ const VideoProfile = ({
       mediaRecorderRef.current.start();
     }, [webcamRef, setCapturing, mediaRecorderRef]);
   
-    const handleDataAvailable = React.useCallback(
+    const handleDataAvailable = useCallback(
       ({ data }) => {
         if (data.size > 0) {
           setRecordedChunks((prev) => prev.concat(data));
@@ -37,12 +49,12 @@ const VideoProfile = ({
       [setRecordedChunks]
     );
   
-    const handleStopCaptureClick = React.useCallback(() => {
+    const handleStopCaptureClick = useCallback(() => {
       mediaRecorderRef.current.stop();
       setCapturing(false);
     }, [mediaRecorderRef, webcamRef, setCapturing]);
   
-    const handleUpload = React.useCallback(() => {
+    const handleUpload = useCallback(() => {
       if (recordedChunks.length) {
         const blob = new Blob(recordedChunks, {
           type: "video/webm"
@@ -72,7 +84,12 @@ const VideoProfile = ({
           <img src={userTorre.picture_thumbnail} alt="userThumbnail" />
         </div>
 
-        <div className={styles.webcamWrap}>
+          <div className={styles.videoPlayerWrap}>
+            <VideoPlayer video_url={profileVideoUrl}/>
+          </div>
+
+
+         <div className={styles.webcamWrap}>
             <Webcam audio={true} ref={webcamRef} />
             {capturing ? (
             <button onClick={handleStopCaptureClick}>Stop Capture</button>
@@ -82,7 +99,7 @@ const VideoProfile = ({
             {recordedChunks.length > 0 && (
             <button onClick={handleUpload}>Save</button>
             )}
-        </div>
+        </div> 
 
       </div>
     </div>

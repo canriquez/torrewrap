@@ -141,7 +141,7 @@ const pushProfileAsset = (assetObject) => (dispatch, getState) => {
       if (assetObject.asset_type === 'video') {
         settings = { 
           uploading: 'idle',
-          video_url: result.asset.cloud_url
+          video_url: result.asset.cloud_url.replace('mkv','mp4')
           }
         }
       dispatch(updateTorreUserDetails(

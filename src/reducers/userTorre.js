@@ -10,6 +10,8 @@ const state_default = {
   inWrapDB: false,
   createUser:'',
   persona: {},
+  picture_thumbnail: '',
+  video_url: 'test'
 };
 
 const userTorre = (state = state_default, action) => {
