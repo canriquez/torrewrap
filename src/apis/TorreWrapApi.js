@@ -169,7 +169,7 @@ const storeProfilePictureApi = async ({ user, auth, asset_type, payload }) => {
   console.log('I am at API StoreProfilePicture');
   //const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
   const baseUrl = 'http://127.0.0.1:5000';
-  const endpoint = '/img_upload?';
+  const endpoint = '/asset_upload?';
   const a = `user=${user}`;
   const b = `&auth=${auth}`;
   const c = `&asset_type=${asset_type}`;
