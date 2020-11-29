@@ -127,14 +127,26 @@ const signUpTorreUser = (userTorre, password) => (dispatch, getState) => {
     });
 };
 
-const pushProfilePicture = (imageObject) => (dispatch, getState) => {
+const pushProfileAsset = (assetObject) => (dispatch, getState) => {
   dispatch(updateTorreUserDetails({ uploading: 'busy' }));
-  return storeProfilePictureApi(imageObject)
+  return storeProfilePictureApi(assetObject)
     .then(result => {
-      dispatch(updateTorreUserDetails({ 
-        uploading: 'idle',
-        picture_thumbnail: result.image.cloud_url
-      }));
+      let settings = {}
+      if (assetObject.asset_type === 'image') {
+        settings = { 
+          uploading: 'idle',
+          picture_thumbnail: result.asset.cloud_url
+          }
+        }
+      if (assetObject.asset_type === 'video') {
+        settings = { 
+          uploading: 'idle',
+          video_url: result.asset.cloud_url
+          }
+        }
+      dispatch(updateTorreUserDetails(
+        settings
+      ));
 
     }).catch(error => {
       dispatch(updateTorreUserDetails({ uploading: 'error' }));
@@ -149,5 +161,5 @@ export {
   validatesWrapUserApi,
   signInWrapUserApi,
   signUpTorreUser,
-  pushProfilePicture,
+  pushProfileAsset,
 };

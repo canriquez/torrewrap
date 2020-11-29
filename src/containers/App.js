@@ -5,6 +5,7 @@ import NavMenu from '../components/NavMenu';
 import SignIn from './SignIn.js';
 import YourAccount from './YourAccount';
 import styles from '../styles/App.module.css';
+import VideoProfile from './VideoProfile';
 
 const App = ({
   userTorre,
@@ -15,7 +16,7 @@ const App = ({
       <Switch>
         <Route exact path="/">
           {userTorre.signedIn
-            ? <YourAccount />
+            ? <VideoProfile />
             : ''}
         </Route>
         <Route path="/signin">

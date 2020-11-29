@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import styles from '../styles/YourAccount.module.css';
 import BootstrapButton from '../components/BootstrapButton';
 import Webcam from 'react-webcam'
-import { pushProfilePicture } from '../actions/index'
+import { pushProfileAsset } from '../actions/index'
 
 const YourAccount = ({
   userTorre,
@@ -12,7 +12,7 @@ const YourAccount = ({
 }) => {
 
   const videoConstraints = {
-    width: 1024,
+    width: 768,
     height: 768,
     facingMode: "user"
   };
@@ -91,7 +91,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispach => ({
   storeProfilePicture: imgObj => {
-    dispach(pushProfilePicture(imgObj));
+    dispach(pushProfileAsset(imgObj));
   },
 
 });
