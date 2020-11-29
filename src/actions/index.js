@@ -4,7 +4,8 @@ import {
   checkValidWrapUser, 
   signInWarpUser, 
   signUpTorreUserApi, 
-  storeProfilePictureApi, 
+  storeProfileAssetApi, 
+  saveProfileAssetApi,
 } from '../apis/TorreWrapApi';
 
 const updateuserDetails = userApi => ({
@@ -129,13 +130,40 @@ const signUpTorreUser = (userTorre, password) => (dispatch, getState) => {
 
 const pushProfileAsset = (assetObject) => (dispatch, getState) => {
   dispatch(updateTorreUserDetails({ uploading: 'busy' }));
-  return storeProfilePictureApi(assetObject)
+  return storeProfileAssetApi(assetObject)
     .then(result => {
       let settings = {}
       if (assetObject.asset_type === 'image') {
         settings = { 
           uploading: 'idle',
-          picture_thumbnail: result.asset.cloud_url
+          draft_thumbnail: result.asset.cloud_url
+          }
+        }
+      if (assetObject.asset_type === 'video') {
+        settings = { 
+          uploading: 'idle',
+          video_url: result.asset.cloud_url.replace('mkv','mp4')
+          }
+        }
+      dispatch(updateTorreUserDetails(
+        settings
+      ));
+
+    }).catch(error => {
+      dispatch(updateTorreUserDetails({ uploading: 'error' }));
+      throw (error);
+    });
+};
+
+const saveProfileAsset = (assetObject) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({ uploading: 'busy' }));
+  return saveProfileAssetApi(assetObject)
+    .then(result => {
+      let settings = {}
+      if (assetObject.asset_type === 'image') {
+        settings = { 
+          uploading: 'idle',
+          picture_thumbnail: result.picture_thumbnail
           }
         }
       if (assetObject.asset_type === 'video') {
@@ -162,4 +190,5 @@ export {
   signInWrapUserApi,
   signUpTorreUser,
   pushProfileAsset,
+  saveProfileAsset,
 };

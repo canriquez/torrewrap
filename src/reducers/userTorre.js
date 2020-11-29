@@ -11,6 +11,7 @@ const state_default = {
   createUser:'',
   persona: {},
   picture_thumbnail: '',
+  draft_thumbnail: undefined,
   video_url: 'test'
 };
 

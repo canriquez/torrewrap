@@ -165,7 +165,7 @@ const signUpTorreUserApi = async ({ public_id, password }) => {
   }
 };
 
-const storeProfilePictureApi = async ({ user, auth, asset_type, payload }) => {
+const storeProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
   console.log('I am at API StoreProfilePicture');
   //const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
   const baseUrl = 'http://127.0.0.1:5000';
@@ -200,11 +200,45 @@ const storeProfilePictureApi = async ({ user, auth, asset_type, payload }) => {
   }
 };
 
+const saveProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
+  console.log('I am at API StoreProfilePicture');
+  //const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  const baseUrl = 'http://127.0.0.1:5000';
+  const endpoint = '/asset_save?';
+  const a = `user=${user}`;
+  const b = `&auth=${auth}`;
+  const c = `&asset_type=${asset_type}`;
+  const appURL = [baseUrl + endpoint + a + b + c ];
+
+  console.log(appURL);
+
+  const request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const response = await fetch(appURL, request);
+    console.log(response);
+    const obj = await response.json();
+
+    console.log({ obj });
+
+    // return complete list
+    return obj;
+  } catch (err) {
+    throw ('Something went wrong with fetching user bio from torre.bio API ', err);
+  }
+};
+
 export {
   signUpTorreWrapApi, 
   checkValidTorreUser, 
   checkValidWrapUser, 
   signInWarpUser, 
   signUpTorreUserApi,
-  storeProfilePictureApi,
+  storeProfileAssetApi,
+  saveProfileAssetApi
 };

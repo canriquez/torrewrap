@@ -1,0 +1,28 @@
+.updateFlowRow {
+    width: 450px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.userPicture img {
+  margin: 20px 0;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+
+.userDraftPicture img {
+  margin: 20px 0;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.placeHolder { /* Empty placeholder */
+  width: 150px;
+  height: 195px;
+}
+

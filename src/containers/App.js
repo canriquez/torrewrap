@@ -6,6 +6,7 @@ import SignIn from './SignIn.js';
 import YourAccount from './YourAccount';
 import styles from '../styles/App.module.css';
 import VideoProfile from './VideoProfile';
+import EditProfilePicture from '../components/EditProfilePicture'
 
 const App = ({
   userTorre,
@@ -16,7 +17,7 @@ const App = ({
       <Switch>
         <Route exact path="/">
           {userTorre.signedIn
-            ? <VideoProfile />
+            ? <EditProfilePicture />
             : ''}
         </Route>
         <Route path="/signin">

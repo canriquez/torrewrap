@@ -35,6 +35,7 @@ const NavMenu = ({
       user_id: null,
       user_name: '',
       picture_thumbnail: '',
+      draft_thumbnail: undefined,
       public_id: '',
       valid: false,
   
