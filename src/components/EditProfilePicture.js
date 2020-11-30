@@ -76,6 +76,17 @@ const EditProfilePicture = ({
         }
     },[selectedFile])
 
+    //when modal gets closed before finishing actions
+    const handleCloseModal = () => {
+        setReadyToSave(false)
+        setSelectedFile(undefined)
+        setCaptureWebCam(false)
+        updateTorreData({
+            draft_thumbnail: undefined,
+            savedProfilePicture: false})
+        handleCloseEdit()
+    }
+
     //Upload draft file to memory blob (input form)
     const handleUploadClick = (e)=>{
         console.log("about to handle file upload")
@@ -181,7 +192,7 @@ const EditProfilePicture = ({
             aria-describedby="transition-modal-description"
             className={classes.modal}
             open={editingPicture}
-            onClose={handleCloseEdit}
+            onClose={handleCloseModal}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
