@@ -13,7 +13,8 @@ const state_default = {
   persona: {},
   picture_thumbnail: '',
   draft_thumbnail: undefined,
-  video_url: 'test',
+  video_url: undefined,
+  draft_video: undefined,
   savedProfilePicture: 'false'
 };
 

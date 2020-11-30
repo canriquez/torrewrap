@@ -1,8 +1,12 @@
 import { StylesProvider } from '@material-ui/core';
 import React, { useEffect, useCallback } from 'react';
 import Webcam from 'react-webcam'
+import styles from '../styles/WebCamStreamCapture.module.css';
+import BootstrapButton from './BootstrapButton';
 
-const WebcamStreamCapture = () => {
+const WebCamStreamCapture = ({
+  handleUpload,
+}) => {
     const webcamRef = React.useRef(null);
     const mediaRecorderRef = React.useRef(null);
     const [capturing, setCapturing] = React.useState(false);
@@ -34,28 +38,43 @@ const WebcamStreamCapture = () => {
       setCapturing(false);
     }, [mediaRecorderRef, webcamRef, setCapturing]);
   
-    const handleDownload = React.useCallback(() => {
+    const saveFile = React.useCallback(() => {
       if (recordedChunks.length) {
         const blob = new Blob(recordedChunks, {
           type: "video/webm"
         });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        document.body.appendChild(a);
-        a.style = "display: none";
-        a.href = url;
-        a.download = "react-webcam-stream-capture.webm";
-        a.click();
-        window.URL.revokeObjectURL(url);
+        console.log("about to start upload")
+        handleUpload(blob)
         setRecordedChunks([]);
       }
     }, [recordedChunks]);
   
     return (
       <div className={styles.videoCapture}>
-
+            <Webcam audio={true} ref={webcamRef} />
+            <div className={styles.menu}>
+              {capturing ? (
+              <BootstrapButton 
+              onClick={handleStopCaptureClick} 
+              href="#contained-buttons" 
+              className={styles.editButton}>Stop Capture</BootstrapButton>
+              ) : (
+              <BootstrapButton 
+              onClick={handleStartCaptureClick}
+              href="#contained-buttons" 
+              className={styles.editButton}
+              >Start Capture</BootstrapButton>
+              )}
+              {recordedChunks.length > 0 && (
+              <BootstrapButton
+              onClick={saveFile}
+              href="#contained-buttons" 
+              className={styles.editButton}
+              >Save</BootstrapButton>
+              )}
+            </div>
       </div>
     );
   };
   
-export default WebcamStreamCapture;
+export default WebCamStreamCapture;

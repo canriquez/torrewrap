@@ -20,7 +20,7 @@ const VideoPlayer =({video_url})=>{
             width='100%'
             height='100%'
             />
-            :'Error loading media...'
+            :'...'
             }
         </>
     

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { makeStyles, StylesProvider } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Tooltip from '@material-ui/core/Tooltip';
+import VideocamIcon from '@material-ui/icons/Videocam';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,15 +28,27 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UploadImageButtons =({
+    video,
     handleUploadClick,
     handleCapturePicture,
     handleDeletePicture
 })=> {
     const classes = useStyles();
+    const captureSettings = [
+        {accept:'image',title:'Take picture.', ariaLevel:'take picture', delete:'https://anri-img-storage.s3.amazonaws.com/avatar/empty.png'}, 
+        {accept:'video',title:'Capture Video', ariaLevel:'capture video', delete:'https://anri-img-storage.s3.amazonaws.com/avatar/no_profile.mp4'}
+    ]
+    let settings = {};
+    if (video) {
+        console.log('ready to capture videos')
+        settings = captureSettings[1]
+    }else{
+        console.log('ready to capture pictures')
+        settings = captureSettings[0]
+    }
 
-
-const deletePicture=()=>{
-    handleDeletePicture("https://anri-img-storage.s3.amazonaws.com/avatar/empty.png")
+    const deletePicture=()=>{
+    handleDeletePicture(settings.delete)
 }
 
 
@@ -44,7 +56,7 @@ const deletePicture=()=>{
         <div className={StylesProvider.uploadForm}>
             <form>
                 <input 
-                accept="image/*" 
+                accept={settings.accept+'/*'}
                 className={classes.input} 
                 style={{ display: 'none' }}
                 id="icon-button-file" 
@@ -59,9 +71,13 @@ const deletePicture=()=>{
                     </Tooltip>
                 </label>
                 <label htmlFor="icon-button-delete">
-                    <Tooltip title="Take picture." aria-label="take picture">
-                        <IconButton color="primary" onClick={handleCapturePicture} aria-label="take picture" component="span">
+                    <Tooltip title={settings.title} aria-label={settings.ariaLevel}>
+                        <IconButton color="primary" onClick={handleCapturePicture} aria-label={settings.ariaLevel} component="span">
+                            {video ? 
+                            <VideocamIcon caption="Record new video"/>
+                            :
                             <PhotoCamera caption="Take new profile picture" />
+                            }
                         </IconButton>
                     </Tooltip>
                 </label>

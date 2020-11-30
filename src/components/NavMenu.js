@@ -38,7 +38,10 @@ const NavMenu = ({
       draft_thumbnail: undefined,
       public_id: '',
       valid: false,
-  
+      cloud_url: undefined,
+      draft_video: undefined,
+      savedProfileVideo: false,
+      video_url: undefined
     });
   };
 

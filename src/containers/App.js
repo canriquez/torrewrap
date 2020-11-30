@@ -6,7 +6,9 @@ import SignIn from './SignIn.js';
 import YourAccount from './YourAccount';
 import styles from '../styles/App.module.css';
 import VideoProfile from './VideoProfile';
-import EditProfilePicture from '../components/EditProfilePicture'
+import EditProfileVideo from '../components/EditProfileVideo'
+import WebCamStreamCapture from '../components/WebCamStreamCapture';
+import EditVideoProfile from './EditVideoProfile';
 
 const App = ({
   userTorre,
@@ -17,7 +19,7 @@ const App = ({
       <Switch>
         <Route exact path="/">
           {userTorre.signedIn
-            ? <YourAccount />
+            ? <EditProfileVideo editingPicture={true}/>
             : ''}
         </Route>
         <Route path="/signin">

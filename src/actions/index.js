@@ -6,6 +6,7 @@ import {
   signUpTorreUserApi, 
   storeProfileAssetApi, 
   saveProfileAssetApi,
+  clearProfileAssetApi
 } from '../apis/TorreWrapApi';
 
 const updateuserDetails = userApi => ({
@@ -142,7 +143,7 @@ const pushProfileAsset = (assetObject) => (dispatch, getState) => {
       if (assetObject.asset_type === 'video') {
         settings = { 
           uploading: 'idle',
-          video_url: result.asset.cloud_url.replace('mkv','mp4')
+          draft_video: result.asset.cloud_url.replace('mkv','mp4')
           }
         }
       dispatch(updateTorreUserDetails(
@@ -170,7 +171,35 @@ const saveProfileAsset = (assetObject) => (dispatch, getState) => {
       if (assetObject.asset_type === 'video') {
         settings = { 
           uploading: 'idle',
-          video_url: result.asset.cloud_url.replace('mkv','mp4')
+          video_url: result.video_url.replace('mkv','mp4')
+          }
+        }
+      dispatch(updateTorreUserDetails(
+        settings
+      ));
+
+    }).catch(error => {
+      dispatch(updateTorreUserDetails({ uploading: 'error' }));
+      throw (error);
+    });
+};
+
+const clearProfileAsset = (assetObject) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({ uploading: 'busy' }));
+  return clearProfileAssetApi(assetObject)
+    .then(result => {
+      let settings = {}
+      if (assetObject.asset_type === 'image') {
+        settings = { 
+          uploading: 'idle',
+          picture_thumbnail: result.picture_thumbnail,
+          savedProfilePicture: true
+          }
+        }
+      if (assetObject.asset_type === 'video') {
+        settings = { 
+          uploading: 'idle',
+          video_url: result.video_url
           }
         }
       dispatch(updateTorreUserDetails(
@@ -192,4 +221,5 @@ export {
   signUpTorreUser,
   pushProfileAsset,
   saveProfileAsset,
+  clearProfileAsset,
 };

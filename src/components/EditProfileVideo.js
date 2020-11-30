@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
-import styles from '../styles/EditProfilePicture.module.css';
-import { pushProfileAsset, saveProfileAsset, updateTorreUserDetails } from '../actions/index'
+import styles from '../styles/EditProfileVideo.module.css';
+import { pushProfileAsset, saveProfileAsset, updateTorreUserDetails, clearProfileAsset } from '../actions/index'
+import WebCamStreamCapture from '../components/WebCamStreamCapture'
+import { blobToBase64 } from '../helpers/componentHelp';
 import UploadImageButtons from './UploadImageButtons';
+import VideoPlayer from '../components/VideoPlayer';
 import BootstrapButton from './BootstrapButton';
-import WebCamPictureCapture from './WebCamPictureCapture'
 import Spinner from './Spinner'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,53 +29,56 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const EditProfilePicture = ({
-    editingPicture, //props from parent
-    handleCloseEdit, //props from parent
+const EditProfileVideo = ({
+    editingVideo, //props from parent
+    handleVideoCloseEdit, //props from parent
     userTorre,
-    storeProfilePicture,
-    saveProfilePicture,
-    updateTorreData
+    storeProfileVideo,
+    saveProfileVideo,
+    updateTorreData,
+    clearProfileVideo
   }) => {
     const classes = useStyles();
-    const {picture_thumbnail, draft_thumbnail, uploading, savedProfilePicture} = userTorre
+    const {video_url, draft_video, uploading, savedProfileVideo} = userTorre
     const [selectedFile, setSelectedFile] = useState(undefined);
     const [captureWebCam, setCaptureWebCam] = useState(false);
     const [readyToSave, setReadyToSave] = useState(false)
 
 
+
     useEffect (()=>{
         //when draft_file exists (only if is loaded into cloud), then we show accept and save button
-        if (draft_thumbnail) {
+        if (draft_video) {
             setReadyToSave(true)
         }
 
-    },[draft_thumbnail])
+    },[draft_video])
 
     useEffect (()=>{
         //when draft_file exists (only if is loaded into cloud), then we show accept and save button
-        if (savedProfilePicture) {
+        if (savedProfileVideo) {
             setReadyToSave(false)
             setSelectedFile(undefined)
             updateTorreData({
-                draft_thumbnail: undefined,
-                savedProfilePicture: false})
-            handleCloseEdit()
+                draft_video: undefined,
+                savedProfileVideo: false})
+            handleVideoCloseEdit()
         }
 
-    },[savedProfilePicture])
+    },[savedProfileVideo])
 
     useEffect(()=>{
         //When the file is ready (by webCam or Input form), initiates the cloud storage
         if (selectedFile){
             console.log('finished uploading file');
             console.log(selectedFile)
-            storeProfilePicture({
+            storeProfileVideo({
                 user:userTorre.user_id, 
                 auth:userTorre.user_id,
-                asset_type: 'image',
+                asset_type: 'video',
                 payload: selectedFile, 
               })
+              setSelectedFile(undefined)
         }
     },[selectedFile])
 
@@ -82,9 +88,9 @@ const EditProfilePicture = ({
         setSelectedFile(undefined)
         setCaptureWebCam(false)
         updateTorreData({
-            draft_thumbnail: undefined,
-            savedProfilePicture: false})
-        handleCloseEdit()
+            draft_video: undefined,
+            savedProfileVideo: false})
+        handleVideoCloseEdit()
     }
 
     //Upload draft file to memory blob (input form)
@@ -105,32 +111,58 @@ const EditProfilePicture = ({
         setCaptureWebCam(true)
         setReadyToSave(false)
         setSelectedFile(undefined)
-        updateTorreData({draft_thumbnail: undefined })
+        updateTorreData({draft_video: undefined })
     }
 
     //After capture click (webcam), updates state with new captured image file b64
-    const handleCaptureClick =(imageSrc)=>{
+/*     const handleCaptureClick =(imageSrc)=>{
         setSelectedFile(imageSrc)
         setCaptureWebCam(false)
-        updateTorreData({draft_thumbnail: undefined })
-    }
+        updateTorreData({draft_video: undefined })
+    } */
     //When profile picture deleted, we store a standar profile avatar
     const handleDeletePicture=(url)=>{
-        setSelectedFile(url)
+        //setSelectedFile(url)
+        clearProfileVideo({
+            user:userTorre.user_id, 
+            auth:userTorre.user_id,
+            asset_type: 'video',
+            cloud_url: url, 
+          })
         setCaptureWebCam(false)
-        updateTorreData({draft_thumbnail: undefined })
+        updateTorreData({draft_video: undefined })
     }
+
+    // Handles video draft storage into cloud
+     //After capture click (webcam), updates state with new captured video after transcode to b64
+    const handleUpload = useCallback((blob) => {
+
+        blobToBase64(blob).then(videoB64 => {
+            console.log({videoB64})
+/*             storeProfileVideo({
+                user:userTorre.user_id, 
+                auth:userTorre.user_id,
+                asset_type: 'video',
+                payload: videoB64 
+              }) */
+            setSelectedFile(videoB64)
+            setCaptureWebCam(false)
+            updateTorreData({draft_video: undefined })
+            blob = undefined;
+        })
+    },);
 
     //When 'Accept and Save' button clicked, we initiate the SaveAsset API call (transforming image and marking as final in cloud)
     const saveNewPicture = ()=>{
-        saveProfilePicture({
+        saveProfileVideo({
             user:userTorre.user_id, 
             auth:userTorre.user_id,
-            asset_type: 'image',
+            asset_type: 'video',
           })
     }
 
     const renderEditProfileBox = () => {
+        console.log('rendering profile box')
         return (
             <div className={styles.yourAccount}>
                 <div className={styles.header}>Edit your profile picture</div>
@@ -139,11 +171,20 @@ const EditProfilePicture = ({
                     <div className={styles.updateFlowRow}>
                         <div className={styles.currentPictureWrap}>
                             <div className={styles.userPicture}>
-                                <p>Current profile picture</p>
-                                <img src={picture_thumbnail} alt="userThumbnail" />
+                                <p>Current video profile</p>
+                                <div className={styles.placeHolderCurrent}>
+                                    {video_url ? 
+                                    //Includes the video player on new draft video
+                                        <div className={styles.currentVideoPlayer}>
+                                            <VideoPlayer video_url={video_url}/>
+                                        </div>
+                                        : ''
+                                    }
+                                </div> 
                             </div>
                             <div className={styles.alterButtons}>
-                                <UploadImageButtons 
+                                <UploadImageButtons
+                                video={true}
                                 handleUploadClick={handleUploadClick} 
                                 handleCapturePicture={handleCapturePicture}
                                 handleDeletePicture={handleDeletePicture}
@@ -152,24 +193,28 @@ const EditProfilePicture = ({
                         </div>
                         <div className={styles.newPictureWrap}>
                             <div className={styles.userDraftPicture}>
-                                <p>New profile picture</p>
-                                {userTorre.draft_thumbnail ? 
-                                    <img src={userTorre.draft_thumbnail} alt="userDraftThumbnail" /> : 
-                                    <div className={styles.placeHolder}></div> 
-                                }
-
+                                <p>New video profile</p>
+                                <div className={styles.placeHolder}>
+                                    {draft_video ? 
+                                    //Includes the video player on new draft video
+                                        <div className={styles.draftVideoPlayer}>
+                                            <VideoPlayer video_url={draft_video}/>
+                                        </div>
+                                        : ''
+                                        
+                                    }
+                                    { captureWebCam ? 
+                                    <WebCamStreamCapture //This component handles the video capturing and passes the blob:b64 for upload
+                                        handleUpload={handleUpload}
+                                    />
+                                    :''
+                                    }
+                                </div> 
                                 {uploading=='busy' ? 
                                 <div className={styles.spinnerWrap}>
                                     <Spinner />
                                 </div>
                                 :''}
-
-
-                                { captureWebCam ? 
-                                <WebCamPictureCapture handleCaptureClick={handleCaptureClick} />
-                                :''
-                                }
-                                
                             </div>
                             <div className={styles.alterButtons}>
                                 { readyToSave ? 
@@ -187,24 +232,24 @@ const EditProfilePicture = ({
     }
 
     return (
-        <Modal
+/*         <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modal}
-            open={editingPicture}
+            open={editingVideo}
             onClose={handleCloseModal}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
-                timeout: 500,
+            timeout: 500,
             }}
         >
-        <Fade in={editingPicture}>
+        <Fade in={editingVideo}> */
           <div className={classes.paper}>
             {renderEditProfileBox()}
           </div>
-        </Fade>
-      </Modal>
+/*         </Fade>
+      </Modal> */
     );
   }
   const mapStateToProps = state => ({
@@ -212,15 +257,18 @@ const EditProfilePicture = ({
   });
   
   const mapDispatchToProps = dispach => ({
-    storeProfilePicture: imgObj => {
+    storeProfileVideo: imgObj => {
       dispach(pushProfileAsset(imgObj));
     },
-    saveProfilePicture: imgObj => {
+    saveProfileVideo: imgObj => {
         dispach(saveProfileAsset(imgObj));
       },
+    clearProfileVideo: obj => {
+        dispach(clearProfileAsset(obj))
+    },
     updateTorreData: (settings)=>{
         dispach(updateTorreUserDetails(settings))
     },
   
   });
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfilePicture);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfileVideo);

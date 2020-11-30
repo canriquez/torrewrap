@@ -200,7 +200,7 @@ const storeProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
   }
 };
 
-const saveProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
+const saveProfileAssetApi = async ({ user, auth, asset_type}) => {
   console.log('I am at API StoreProfilePicture');
   //const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
   const baseUrl = 'http://127.0.0.1:5000';
@@ -233,6 +233,40 @@ const saveProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
   }
 };
 
+const clearProfileAssetApi = async ({ user, auth, asset_type, cloud_url}) => {
+  console.log('I am at API StoreProfilePicture');
+  //const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  const baseUrl = 'http://127.0.0.1:5000';
+  const endpoint = '/asset_delete?';
+  const a = `user=${user}`;
+  const b = `&auth=${auth}`;
+  const c = `&asset_type=${asset_type}`;
+  const d = `&cloud_url=${cloud_url};`
+  const appURL = [baseUrl + endpoint + a + b + c + d];
+
+  console.log(appURL);
+
+  const request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const response = await fetch(appURL, request);
+    console.log(response);
+    const obj = await response.json();
+
+    console.log({ obj });
+
+    // return complete list
+    return obj;
+  } catch (err) {
+    throw ('Something went wrong with fetching user bio from torre.bio API ', err);
+  }
+};
+
 export {
   signUpTorreWrapApi, 
   checkValidTorreUser, 
@@ -240,5 +274,6 @@ export {
   signInWarpUser, 
   signUpTorreUserApi,
   storeProfileAssetApi,
-  saveProfileAssetApi
+  saveProfileAssetApi,
+  clearProfileAssetApi
 };
