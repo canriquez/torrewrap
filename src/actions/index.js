@@ -163,7 +163,8 @@ const saveProfileAsset = (assetObject) => (dispatch, getState) => {
       if (assetObject.asset_type === 'image') {
         settings = { 
           uploading: 'idle',
-          picture_thumbnail: result.picture_thumbnail
+          picture_thumbnail: result.picture_thumbnail,
+          savedProfilePicture: true
           }
         }
       if (assetObject.asset_type === 'video') {

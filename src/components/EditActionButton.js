@@ -38,13 +38,15 @@ const useStyles2 = makeStyles((theme) => ({
       },
   }));
 
-const EditActionButton =()=> {
+const EditActionButton =({
+    handleOpenEdit
+})=> {
   const classes = useStyles();
   const classesIcon = useStyles2();
 
   return (
     <div className={classes.root}>
-      <Fab size="small" className={classesIcon.primary} aria-label="edit" >
+      <Fab size="small" onClick={handleOpenEdit} className={classesIcon.primary} aria-label="edit" >
         <EditIcon />
       </Fab>
     </div>

@@ -13,7 +13,8 @@ const state_default = {
   persona: {},
   picture_thumbnail: '',
   draft_thumbnail: undefined,
-  video_url: 'test'
+  video_url: 'test',
+  savedProfilePicture: 'false'
 };
 
 const userTorre = (state = state_default, action) => {
