@@ -15,7 +15,11 @@ const state_default = {
   draft_thumbnail: undefined,
   video_url: undefined,
   draft_video: undefined,
-  savedProfileAsset: false
+  savedProfileAsset: false,
+  torre_data: {
+    location: {name:''},
+    links:[{address:''},{address:''},{address:''},{address:''}]
+  }
 };
 
 const userTorre = (state = state_default, action) => {

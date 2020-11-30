@@ -21,11 +21,14 @@ const App = ({
       <Switch>
         <Route exact path="/">
           {userTorre.signedIn
-            ? <YourGenome />
+            ? <YourAccount />
             : ''}
         </Route>
         <Route path="/signin">
           <SignIn />
+        </Route>
+        <Route path="/genome">
+          <YourGenome />
         </Route>
         <Route path={'/*'} render={() => <Redirect to="/" />} />
       </Switch>

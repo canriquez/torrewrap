@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect  } from 'react-router-dom';
 import styles from '../styles/YourGenome.module.css';
-import { pushProfileAsset } from '../actions/index'
+import { pushProfileAsset, updateTorreUserDetails, } from '../actions/index'
 import EditActionButton from '../components/EditActionButton';
 import EditProfilePicture from '../components/EditProfilePicture';
 import EditProfileVideo from '../components/EditProfileVideo'
@@ -16,13 +16,24 @@ import LocalMoviesIcon from '@material-ui/icons/LocalMovies';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import {hasVideoProfile} from '../helpers/componentHelp'
+import { USER_RECORD } from '../helpers/help';
 
 const YourGenome = ({
   userTorre,
+  updateUserTorreData
 }) => {
+
   const {video_url} = userTorre;
   const [editingPicture, setEditingPicture] = useState(false);
   const [editingVideo, setEditingVideo] = useState(false);
+
+
+  if (!window.localStorage.hasOwnProperty(USER_RECORD)) {
+    return (
+      <Redirect to="/" />
+    );
+    };
+
 
   const handleOpenEditPicture = () => {
     console.log('trying to open modal')
@@ -117,6 +128,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispach => ({
   storeProfilePicture: imgObj => {
     dispach(pushProfileAsset(imgObj));
+  },
+  updateUserTorreData: data => {
+    dispach(updateTorreUserDetails(data));
   },
 
 });

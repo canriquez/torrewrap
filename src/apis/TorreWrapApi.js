@@ -267,6 +267,39 @@ const clearProfileAssetApi = async ({ user, auth, asset_type, cloud_url}) => {
   }
 };
 
+const refreshProfileApi = async ({ user, auth}) => {
+  console.log('I am at API StoreProfilePicture');
+  //const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  const baseUrl = 'http://127.0.0.1:5000';
+  const endpoint = '/asset_delete?';
+  const a = `user=${user}`;
+  const b = `&auth=${auth}`;
+
+  const appURL = [baseUrl + endpoint + a + b ];
+
+  console.log(appURL);
+
+  const request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const response = await fetch(appURL, request);
+    console.log(response);
+    const obj = await response.json();
+
+    console.log({ obj });
+
+    // return complete list
+    return obj;
+  } catch (err) {
+    throw ('Something went wrong with fetching user bio from torre.bio API ', err);
+  }
+};
+
 export {
   signUpTorreWrapApi, 
   checkValidTorreUser, 
@@ -275,5 +308,6 @@ export {
   signUpTorreUserApi,
   storeProfileAssetApi,
   saveProfileAssetApi,
-  clearProfileAssetApi
+  clearProfileAssetApi,
+  refreshProfileApi
 };

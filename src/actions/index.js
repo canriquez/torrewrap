@@ -6,7 +6,8 @@ import {
   signUpTorreUserApi, 
   storeProfileAssetApi, 
   saveProfileAssetApi,
-  clearProfileAssetApi
+  clearProfileAssetApi,
+  refreshProfileApi,
 } from '../apis/TorreWrapApi';
 
 const updateuserDetails = userApi => ({
@@ -178,7 +179,6 @@ const saveProfileAsset = (assetObject) => (dispatch, getState) => {
       dispatch(updateTorreUserDetails(
         settings
       ));
-
     }).catch(error => {
       dispatch(updateTorreUserDetails({ uploading: 'error' }));
       throw (error);
@@ -213,6 +213,31 @@ const clearProfileAsset = (assetObject) => (dispatch, getState) => {
     });
 };
 
+const refreshProfile = (refreshObject) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({ fetching: 'busy' }));
+  return refreshProfileApi(refreshObject)
+    .then(result => {
+      dispatch(updateTorreUserDetails({ fetching: 'idle' }));
+      if (result.user_id) {
+        localStorage.setItem(USER_RECORD, JSON.stringify(result));
+        dispatch(updateTorreUserDetails({
+          signedIn: true,
+          errors: [],
+          ...result,
+        }));
+      } else {
+        dispatch(updateTorreUserDetails({
+          signedIn: false,
+          errors: [result.message],
+        }));
+      }
+    }).catch(error => {
+      dispatch(updateTorreUserDetails({ signedIn: false }));
+      throw (error);
+    });
+};
+
+
 export {
   updateuserDetails,
   updateTorreUserDetails,
@@ -223,4 +248,5 @@ export {
   pushProfileAsset,
   saveProfileAsset,
   clearProfileAsset,
+  refreshProfile,
 };
