@@ -35,7 +35,7 @@ const EditProfilePicture = ({
     updateTorreData
   }) => {
     const classes = useStyles();
-    const {picture_thumbnail, draft_thumbnail, uploading, savedProfilePicture} = userTorre
+    const {picture_thumbnail, draft_thumbnail, uploading, savedProfileAsset} = userTorre
     const [selectedFile, setSelectedFile] = useState(undefined);
     const [captureWebCam, setCaptureWebCam] = useState(false);
     const [readyToSave, setReadyToSave] = useState(false)
@@ -50,17 +50,17 @@ const EditProfilePicture = ({
     },[draft_thumbnail])
 
     useEffect (()=>{
-        //when draft_file exists (only if is loaded into cloud), then we show accept and save button
-        if (savedProfilePicture) {
+        //When profile Asset is saved, then we can close the modal
+        if (savedProfileAsset) {
             setReadyToSave(false)
             setSelectedFile(undefined)
             updateTorreData({
                 draft_thumbnail: undefined,
-                savedProfilePicture: false})
+                savedProfileAsset: false})
             handleCloseEdit()
         }
 
-    },[savedProfilePicture])
+    },[savedProfileAsset])
 
     useEffect(()=>{
         //When the file is ready (by webCam or Input form), initiates the cloud storage
@@ -83,7 +83,7 @@ const EditProfilePicture = ({
         setCaptureWebCam(false)
         updateTorreData({
             draft_thumbnail: undefined,
-            savedProfilePicture: false})
+            savedProfileAsset: false})
         handleCloseEdit()
     }
 

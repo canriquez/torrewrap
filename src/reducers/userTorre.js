@@ -15,7 +15,7 @@ const state_default = {
   draft_thumbnail: undefined,
   video_url: undefined,
   draft_video: undefined,
-  savedProfilePicture: 'false'
+  savedProfileAsset: false
 };
 
 const userTorre = (state = state_default, action) => {

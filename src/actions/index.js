@@ -165,13 +165,14 @@ const saveProfileAsset = (assetObject) => (dispatch, getState) => {
         settings = { 
           uploading: 'idle',
           picture_thumbnail: result.picture_thumbnail,
-          savedProfilePicture: true
+          savedProfileAsset: true
           }
         }
       if (assetObject.asset_type === 'video') {
         settings = { 
           uploading: 'idle',
-          video_url: result.video_url.replace('mkv','mp4')
+          video_url: result.video_url.replace('mkv','mp4'),
+          savedProfileAsset: true
           }
         }
       dispatch(updateTorreUserDetails(

@@ -6,6 +6,7 @@ import BootstrapButton from '../components/BootstrapButton';
 import { pushProfileAsset } from '../actions/index'
 import EditActionButton from '../components/EditActionButton';
 import EditProfilePicture from '../components/EditProfilePicture';
+import EditProfileVideo from '../components/EditProfileVideo'
 
 const YourAccount = ({
   userTorre,
@@ -38,7 +39,8 @@ const YourAccount = ({
           </div>
         </div>
 
-        <EditProfilePicture handleCloseEdit={handleCloseEdit} editingPicture={editingPicture}/>
+        {/* <EditProfileVideo handleVideoCloseEdit={handleCloseEdit} editingVideo={editingPicture}/> */}
+        <EditProfilePicture handleCloseEdit={handleCloseEdit} editingPicture={editingPicture} />
 
         <div className={styles.dataRow}>
           <div className={styles.itemName}>Your full name*</div>

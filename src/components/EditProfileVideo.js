@@ -39,7 +39,7 @@ const EditProfileVideo = ({
     clearProfileVideo
   }) => {
     const classes = useStyles();
-    const {video_url, draft_video, uploading, savedProfileVideo} = userTorre
+    const {video_url, draft_video, uploading, savedProfileAsset} = userTorre
     const [selectedFile, setSelectedFile] = useState(undefined);
     const [captureWebCam, setCaptureWebCam] = useState(false);
     const [readyToSave, setReadyToSave] = useState(false)
@@ -55,17 +55,18 @@ const EditProfileVideo = ({
     },[draft_video])
 
     useEffect (()=>{
-        //when draft_file exists (only if is loaded into cloud), then we show accept and save button
-        if (savedProfileVideo) {
+        //When profile Asset is saved, then we can close the modal
+        if (savedProfileAsset) {
+            console.log('cleaning up to close modal...')
             setReadyToSave(false)
             setSelectedFile(undefined)
             updateTorreData({
                 draft_video: undefined,
-                savedProfileVideo: false})
+                savedProfileAsset: false})
             handleVideoCloseEdit()
         }
 
-    },[savedProfileVideo])
+    },[savedProfileAsset])
 
     useEffect(()=>{
         //When the file is ready (by webCam or Input form), initiates the cloud storage
@@ -89,7 +90,7 @@ const EditProfileVideo = ({
         setCaptureWebCam(false)
         updateTorreData({
             draft_video: undefined,
-            savedProfileVideo: false})
+            savedProfileAsset: false})
         handleVideoCloseEdit()
     }
 
@@ -165,7 +166,7 @@ const EditProfileVideo = ({
         console.log('rendering profile box')
         return (
             <div className={styles.yourAccount}>
-                <div className={styles.header}>Edit your profile picture</div>
+                <div className={styles.header}>Add and edit your profile picture</div>
                 <div className={styles.profileWindow}>
                     <div className={styles.profileWrap}>
                     <div className={styles.updateFlowRow}>
@@ -232,7 +233,7 @@ const EditProfileVideo = ({
     }
 
     return (
-/*         <Modal
+        <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modal}
@@ -244,12 +245,12 @@ const EditProfileVideo = ({
             timeout: 500,
             }}
         >
-        <Fade in={editingVideo}> */
+        <Fade in={editingVideo}>
           <div className={classes.paper}>
             {renderEditProfileBox()}
           </div>
-/*         </Fade>
-      </Modal> */
+        </Fade>
+      </Modal>
     );
   }
   const mapStateToProps = state => ({
