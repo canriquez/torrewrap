@@ -54,7 +54,9 @@ const EditProfilePicture = ({
         if (savedProfilePicture) {
             setReadyToSave(false)
             setSelectedFile(undefined)
-            updateTorreData({draft_thumbnail: undefined })
+            updateTorreData({
+                draft_thumbnail: undefined,
+                savedProfilePicture: false})
             handleCloseEdit()
         }
 
