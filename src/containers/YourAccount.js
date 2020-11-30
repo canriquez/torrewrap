@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import styles from '../styles/YourAccount.module.css';
 import BootstrapButton from '../components/BootstrapButton';
 import { pushProfileAsset } from '../actions/index'
+import EditActionButton from '../components/EditActionButton';
 
 const YourAccount = ({
   userTorre,
@@ -18,10 +19,14 @@ const YourAccount = ({
     <div className={styles.profileWindow}>
       <div className={styles.profileWrap}>
         <div className={styles.headingRow}>Your picture</div>
-        <div className={styles.userPicture}>
-          <img src={userTorre.picture_thumbnail} alt="userThumbnail" />
+        <div className={styles.profilePicture}>
+          <div className={styles.userPicture}>
+            <img src={userTorre.picture_thumbnail} alt="userThumbnail" />
+          </div>
+          <div className={styles.editProfile}>
+              <EditActionButton />
+          </div>
         </div>
-
         <div className={styles.dataRow}>
           <div className={styles.itemName}>Your full name*</div>
           <p>{userTorre.user_name}</p>

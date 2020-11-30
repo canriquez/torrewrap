@@ -17,7 +17,7 @@ const App = ({
       <Switch>
         <Route exact path="/">
           {userTorre.signedIn
-            ? <EditProfilePicture />
+            ? <YourAccount />
             : ''}
         </Route>
         <Route path="/signin">

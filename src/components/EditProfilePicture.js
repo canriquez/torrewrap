@@ -15,7 +15,7 @@ const EditProfilePicture = ({
     saveProfilePicture,
     updateTorreData
   }) => {
-      const {picture_thumbnail, draft_thumbnail, uploading} = userTorre
+    const {picture_thumbnail, draft_thumbnail, uploading} = userTorre
     const [selectedFile, setSelectedFile] = useState(undefined);
     const [captureWebCam, setCaptureWebCam] = useState(false);
     const [readyToSave, setReadyToSave] = useState(false)
@@ -30,7 +30,7 @@ const EditProfilePicture = ({
     },[draft_thumbnail])
 
     useEffect(()=>{
-        //When the file is ready, initiates the cloud storage
+        //When the file is ready (by webCam or Input form), initiates the cloud storage
         if (selectedFile){
             console.log('finished uploading file');
             console.log(selectedFile)
@@ -43,7 +43,7 @@ const EditProfilePicture = ({
         }
     },[selectedFile])
 
-    //Upload draft file to memory
+    //Upload draft file to memory blob (input form)
     const handleUploadClick = (e)=>{
         console.log("about to handle file upload")
         const file = e.target.files[0]
@@ -64,7 +64,7 @@ const EditProfilePicture = ({
         updateTorreData({draft_thumbnail: undefined })
     }
 
-    //After capture click, updates state with capture image file b64
+    //After capture click (webcam), updates state with new captured image file b64
     const handleCaptureClick =(imageSrc)=>{
         setSelectedFile(imageSrc)
         setCaptureWebCam(false)
@@ -77,8 +77,8 @@ const EditProfilePicture = ({
         updateTorreData({draft_thumbnail: undefined })
     }
 
+    //When 'Accept and Save' button clicked, we initiate the SaveAsset API call (transforming image and marking as final in cloud)
     const saveNewPicture = ()=>{
-        console.log('Nada')
         saveProfilePicture({
             user:userTorre.user_id, 
             auth:userTorre.user_id,
@@ -86,13 +86,11 @@ const EditProfilePicture = ({
           })
     }
 
-
     return (
     <div className={styles.yourAccount}>
-      <div className={styles.header}>Your account</div>
+      <div className={styles.header}>Edit your profile picture</div>
       <div className={styles.profileWindow}>
         <div className={styles.profileWrap}>
-          <div className={styles.headingRow}>Edit</div>
           <div className={styles.updateFlowRow}>
             <div className={styles.currentPictureWrap}>
                 <div className={styles.userPicture}>
