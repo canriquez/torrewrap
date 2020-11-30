@@ -9,6 +9,8 @@ import VideoProfile from './VideoProfile';
 import EditProfileVideo from '../components/EditProfileVideo'
 import WebCamStreamCapture from '../components/WebCamStreamCapture';
 import EditVideoProfile from './EditVideoProfile';
+import YourGenome from '../containers/YourGenome'
+
 
 const App = ({
   userTorre,
@@ -19,7 +21,7 @@ const App = ({
       <Switch>
         <Route exact path="/">
           {userTorre.signedIn
-            ? <YourAccount />
+            ? <YourGenome />
             : ''}
         </Route>
         <Route path="/signin">

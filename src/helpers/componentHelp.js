@@ -8,4 +8,11 @@ const blobToBase64 = blob => {
     });
   };
 
-  export {blobToBase64}
+
+const hasVideoProfile = (url) =>{
+    if (url.includes('no_profile.mp4') || !url)
+        return false
+    return true
+  }
+
+  export {blobToBase64,hasVideoProfile}

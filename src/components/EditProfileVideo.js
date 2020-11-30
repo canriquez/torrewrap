@@ -130,8 +130,9 @@ const EditProfileVideo = ({
             asset_type: 'video',
             cloud_url: url, 
           })
-        setCaptureWebCam(false)
-        updateTorreData({draft_video: undefined })
+        setCaptureWebCam(false);
+        updateTorreData({draft_video: undefined });
+        handleVideoCloseEdit();
     }
 
     // Handles video draft storage into cloud
