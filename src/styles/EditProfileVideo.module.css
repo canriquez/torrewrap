@@ -1,0 +1,117 @@
+.yourAccount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+}
+
+.header {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: left;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  font-weight: 100;
+  padding: 20px;
+  height: 56px;
+  background-color: #27292d;
+  color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.profileWrap {
+  padding: 22px 16px 16px;
+  width: 680px;
+  background-color: #27292d;
+}
+
+
+.userDraftPicture {
+    position: relative;
+}
+
+.updateFlowRow {
+    width: 650px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.userPicture {
+  martin-top: 10px;
+  width: 300px;
+  height: 225px;
+}
+
+.placeHolderCurrent{
+  border: 1px dotted black;
+  width: 300px;
+  height: 225px;
+}
+
+.userPicture p {
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.currentVideoPlayer {
+  display: flex;
+  align-items: center;
+}
+
+.currentVideoPlayer video{
+  width: 300px;
+  height: 225px;
+  object-fit: cover;
+}
+
+/* .userPicture video {
+  margin-top:16px;
+  width: 300px;
+  height: 225px;
+} */
+
+.alterButtons{
+  margin-top: 40px;
+}
+
+.userDraftPicture p {
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+.userDraftPicture video {
+  width: 300px;
+  height: 225px;
+}
+
+
+.draftVideoPlayer{
+  width: 300px;
+  height: 225px;
+}
+
+.draftVideoPlayer video {
+  width: 300px;
+  height: 225px;
+}
+
+.placeHolder { /* Empty placeholder */
+  border: 1px dotted black;
+  position: relative;
+  width: 300px;
+  height: 225px;
+}
+
+.spinnerWrap {
+    position: absolute;
+    top: 110px;
+    right: 130px;
+}
+

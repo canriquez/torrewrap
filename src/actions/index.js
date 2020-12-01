@@ -1,5 +1,14 @@
 import { UPDATE_USERAPI_DETAILS, UPDATE_USERTORRE_DETAILS, USER_RECORD } from '../helpers/help';
-import { checkValidTorreUser, checkValidWrapUser, signInWarpUser, signUpTorreUserApi } from '../apis/TorreWrapApi';
+import { 
+  checkValidTorreUser, 
+  checkValidWrapUser, 
+  signInWarpUser, 
+  signUpTorreUserApi, 
+  storeProfileAssetApi, 
+  saveProfileAssetApi,
+  clearProfileAssetApi,
+  refreshProfileApi,
+} from '../apis/TorreWrapApi';
 
 const updateuserDetails = userApi => ({
   type: UPDATE_USERAPI_DETAILS,
@@ -121,6 +130,114 @@ const signUpTorreUser = (userTorre, password) => (dispatch, getState) => {
     });
 };
 
+const pushProfileAsset = (assetObject) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({ uploading: 'busy' }));
+  return storeProfileAssetApi(assetObject)
+    .then(result => {
+      let settings = {}
+      if (assetObject.asset_type === 'image') {
+        settings = { 
+          uploading: 'idle',
+          draft_thumbnail: result.asset.cloud_url
+          }
+        }
+      if (assetObject.asset_type === 'video') {
+        settings = { 
+          uploading: 'idle',
+          draft_video: result.asset.cloud_url.replace('mkv','mp4')
+          }
+        }
+      dispatch(updateTorreUserDetails(
+        settings
+      ));
+
+    }).catch(error => {
+      dispatch(updateTorreUserDetails({ uploading: 'error' }));
+      throw (error);
+    });
+};
+
+const saveProfileAsset = (assetObject) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({ uploading: 'busy' }));
+  return saveProfileAssetApi(assetObject)
+    .then(result => {
+      let settings = {}
+      if (assetObject.asset_type === 'image') {
+        settings = { 
+          uploading: 'idle',
+          picture_thumbnail: result.picture_thumbnail,
+          savedProfileAsset: true
+          }
+        }
+      if (assetObject.asset_type === 'video') {
+        settings = { 
+          uploading: 'idle',
+          video_url: result.video_url.replace('mkv','mp4'),
+          savedProfileAsset: true
+          }
+        }
+      dispatch(updateTorreUserDetails(
+        settings
+      ));
+    }).catch(error => {
+      dispatch(updateTorreUserDetails({ uploading: 'error' }));
+      throw (error);
+    });
+};
+
+const clearProfileAsset = (assetObject) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({ uploading: 'busy' }));
+  return clearProfileAssetApi(assetObject)
+    .then(result => {
+      let settings = {}
+      if (assetObject.asset_type === 'image') {
+        settings = { 
+          uploading: 'idle',
+          picture_thumbnail: result.picture_thumbnail,
+          savedProfilePicture: true
+          }
+        }
+      if (assetObject.asset_type === 'video') {
+        settings = { 
+          uploading: 'idle',
+          video_url: result.video_url
+          }
+        }
+      dispatch(updateTorreUserDetails(
+        settings
+      ));
+
+    }).catch(error => {
+      dispatch(updateTorreUserDetails({ uploading: 'error' }));
+      throw (error);
+    });
+};
+
+const refreshProfile = (refreshObject) => (dispatch, getState) => {
+  dispatch(updateTorreUserDetails({ fetching: 'busy' }));
+  return refreshProfileApi(refreshObject)
+    .then(result => {
+      dispatch(updateTorreUserDetails({ fetching: 'idle' }));
+      if (result.user_id) {
+        localStorage.setItem(USER_RECORD, JSON.stringify(result));
+        dispatch(updateTorreUserDetails({
+          signedIn: true,
+          errors: [],
+          ...result,
+        }));
+      } else {
+        dispatch(updateTorreUserDetails({
+          signedIn: false,
+          errors: [result.message],
+        }));
+      }
+    }).catch(error => {
+      dispatch(updateTorreUserDetails({ signedIn: false }));
+      throw (error);
+    });
+};
+
+
 export {
   updateuserDetails,
   updateTorreUserDetails,
@@ -128,4 +245,8 @@ export {
   validatesWrapUserApi,
   signInWrapUserApi,
   signUpTorreUser,
+  pushProfileAsset,
+  saveProfileAsset,
+  clearProfileAsset,
+  refreshProfile,
 };

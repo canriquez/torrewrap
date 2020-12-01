@@ -5,11 +5,21 @@ import {
 const state_default = {
   errors: [],
   fetching: 'idle',
+  uploading: 'idle',
   signedIn: false,
   valid: false,
   inWrapDB: false,
   createUser:'',
   persona: {},
+  picture_thumbnail: '',
+  draft_thumbnail: undefined,
+  video_url: undefined,
+  draft_video: undefined,
+  savedProfileAsset: false,
+  torre_data: {
+    location: {name:''},
+    links:[{address:''},{address:''},{address:''},{address:''}]
+  }
 };
 
 const userTorre = (state = state_default, action) => {

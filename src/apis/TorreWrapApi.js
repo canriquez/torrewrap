@@ -7,8 +7,8 @@ const signUpTorreWrapApi = async ({
   password_confirmation,
   picture_thumbnail,
 }) => {
-  const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Heroku app
-  // const baseUrl = 'http://127.0.0.1:5000';
+  const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/signup';
   const a = `?name=${name}`;
   const b = `?public_id=${public_id}`;
@@ -38,6 +38,7 @@ const checkValidTorreUser = async ({ public_id }) => {
   console.log('I am at API torre');
   console.log({ public_id });
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/auth/person/';
   const a = `${public_id}`;
   const appURL = [baseUrl + endpoint + a];
@@ -69,6 +70,7 @@ const checkValidWrapUser = async ({ public_id }) => {
   console.log('I am at API Wrap User');
   console.log({ public_id });
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/auth/wrapuser/';
   const a = `${public_id}`;
   const appURL = [baseUrl + endpoint + a];
@@ -100,6 +102,7 @@ const signInWarpUser = async ({ public_id, password }) => {
   console.log('I am at API Wrap User');
   console.log({ public_id });
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/auth/login?';
   const a = `public_id=${public_id}`;
   const b = `&password=${password}`;
@@ -132,6 +135,7 @@ const signUpTorreUserApi = async ({ public_id, password }) => {
   console.log('I am at API Wrap User');
   console.log({ public_id });
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/signup?';
   const a = `public_id=${public_id}`;
   const b = `&password=${password}`;
@@ -161,6 +165,151 @@ const signUpTorreUserApi = async ({ public_id, password }) => {
   }
 };
 
+const storeProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
+  console.log('I am at API StoreProfilePicture');
+  const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
+  const endpoint = '/asset_upload?';
+  const a = `user=${user}`;
+  const b = `&auth=${auth}`;
+  const c = `&asset_type=${asset_type}`;
+  const d = `&payload=${payload}`;
+  const appURL = [baseUrl + endpoint + a + b + c ];
+
+  console.log(appURL);
+
+  const request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({payload: payload})
+  };
+  try {
+    const response = await fetch(appURL, request);
+    console.log('this is the response I got');
+    console.log(response);
+    const obj = await response.json();
+    console.log('I just parsed Json')
+    console.log({ obj });
+
+    // return complete list
+    return obj;
+  } catch (err) {
+    throw ('Something went wrong with fetching user bio from torre.bio API ', err);
+  }
+};
+
+const saveProfileAssetApi = async ({ user, auth, asset_type}) => {
+  console.log('I am at API StoreProfilePicture');
+  const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
+  const endpoint = '/asset_save?';
+  const a = `user=${user}`;
+  const b = `&auth=${auth}`;
+  const c = `&asset_type=${asset_type}`;
+  const appURL = [baseUrl + endpoint + a + b + c ];
+
+  console.log(appURL);
+
+  const request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Credentials" : true,
+    },
+  };
+  try {
+    const response = await fetch(appURL, request);
+    console.log(response);
+    const obj = await response.json();
+
+    console.log({ obj });
+
+    // return complete list
+    return obj;
+  } catch (err) {
+    throw ('Something went wrong with fetching user bio from torre.bio API ', err);
+  }
+};
+
+const clearProfileAssetApi = async ({ user, auth, asset_type, cloud_url}) => {
+  console.log('I am at API StoreProfilePicture');
+  const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
+  const endpoint = '/asset_delete?';
+  const a = `user=${user}`;
+  const b = `&auth=${auth}`;
+  const c = `&asset_type=${asset_type}`;
+  const d = `&cloud_url=${cloud_url};`
+  const appURL = [baseUrl + endpoint + a + b + c + d];
+
+  console.log(appURL);
+
+  const request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const response = await fetch(appURL, request);
+    console.log(response);
+    const obj = await response.json();
+
+    console.log({ obj });
+
+    // return complete list
+    return obj;
+  } catch (err) {
+    throw ('Something went wrong with fetching user bio from torre.bio API ', err);
+  }
+};
+
+const refreshProfileApi = async ({ user, auth}) => {
+  console.log('I am at API StoreProfilePicture');
+  const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
+  //const baseUrl = 'http://127.0.0.1:5000';
+  const endpoint = '/asset_delete?';
+  const a = `user=${user}`;
+  const b = `&auth=${auth}`;
+
+  const appURL = [baseUrl + endpoint + a + b ];
+
+  console.log(appURL);
+
+  const request = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const response = await fetch(appURL, request);
+    console.log(response);
+    const obj = await response.json();
+
+    console.log({ obj });
+
+    // return complete list
+    return obj;
+  } catch (err) {
+    throw ('Something went wrong with fetching user bio from torre.bio API ', err);
+  }
+};
+
 export {
-  signUpTorreWrapApi, checkValidTorreUser, checkValidWrapUser, signInWarpUser, signUpTorreUserApi
+  signUpTorreWrapApi, 
+  checkValidTorreUser, 
+  checkValidWrapUser, 
+  signInWarpUser, 
+  signUpTorreUserApi,
+  storeProfileAssetApi,
+  saveProfileAssetApi,
+  clearProfileAssetApi,
+  refreshProfileApi
 };

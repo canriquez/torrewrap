@@ -1,0 +1,9 @@
+.videoCapture video{
+    margin-top: 0px;
+}
+
+.menu{
+    padding-top:25px;
+    display: flex;
+    justify-content: space-between;
+}

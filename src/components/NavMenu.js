@@ -6,13 +6,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
 import styles from '../styles/NavMenu.module.css';
-import { updateTorreUserDetails } from '../actions/index';
+import { updateTorreUserDetails, refreshProfile } from '../actions/index';
 import { USER_RECORD } from '../helpers/help';
 
 const NavMenu = ({
   userTorre,
   updateUserTorreData,
+  refreshTorreData
 }) => {
+  const {video_url,picture_thumbnail} = userTorre
   useEffect(() => {
     if (window.localStorage.hasOwnProperty(USER_RECORD)) {
       console.log('YES, WE ARE LOGGED IN');
@@ -35,9 +37,13 @@ const NavMenu = ({
       user_id: null,
       user_name: '',
       picture_thumbnail: '',
+      draft_thumbnail: undefined,
       public_id: '',
       valid: false,
-  
+      cloud_url: undefined,
+      draft_video: undefined,
+      savedProfileVideo: false,
+      video_url: undefined
     });
   };
 
@@ -53,10 +59,12 @@ const NavMenu = ({
           <SearchIcon fontSize="medium" className={styles.menuIcon} />
           <p>Search</p>
         </div>
-        <div className={styles.menuBox}>
-          <PersonIcon fontSize="medium" className={styles.menuIcon} />
-          <p>Your genome</p>
-        </div>
+        <RouterLink to={'/genome'} >
+          <div className={styles.menuBox}>
+            <PersonIcon fontSize="medium" className={styles.menuIcon} />
+            <p>Your genome</p>
+          </div>
+        </RouterLink>
         {userTorre.signedIn
           ? (
             <div onClick={logOff} className={styles.exagonPicture}>
@@ -83,6 +91,9 @@ const mapDispatchToProps = dispach => ({
   updateUserTorreData: data => {
     dispach(updateTorreUserDetails(data));
   },
+  refreshTorreData: refreshObject => {
+    dispach(refreshProfile(refreshObject))
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavMenu);

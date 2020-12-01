@@ -39,9 +39,32 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
+.profilePicture {
+  position: relative;
+}
+
+.editProfile {
+  display: none;
+}
+
+.editProfile:hover {
+  position: absolute;
+  display: inline-block;
+  bottom: 5%;  
+  right: 28%;
+}
+
 .userPicture {
+  position: relative;
   display: flex;
   justify-content: center;
+}
+
+.userPicture:hover~.editProfile{
+  position: absolute;
+  display: inline-block;
+  bottom: 5%;  
+  right: 28%;
 }
 
 .userPicture img {
@@ -49,7 +72,9 @@
   border-radius: 100%;
   height: 150px;
   width: 150px;
+  object-fit: cover;
 }
+
 
 .dataRow {
   margin: 20px 0;
@@ -80,4 +105,11 @@
 
 .editButton {
   color: rgb(204, 220, 57);
+}
+
+
+/* Video Capture Window */
+.webcam {
+  width: 100%;
+  height: 100%;
 }

@@ -1,0 +1,83 @@
+.yourAccount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+}
+
+.header {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: left;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  font-weight: 100;
+  padding: 20px;
+  height: 56px;
+  background-color: #27292d;
+  color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.profileWrap {
+  padding: 22px 16px 16px;
+  width: 500px;
+  background-color: #27292d;
+}
+
+
+.userDraftPicture {
+    position: relative;
+}
+
+.updateFlowRow {
+    width: 450px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.userPicture p {
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.userPicture img {
+  margin: 20px 0;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.userDraftPicture p {
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+.userDraftPicture img {
+  margin: 20px 0;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.placeHolder { /* Empty placeholder */
+  position: relative;
+  width: 150px;
+  height: 195px;
+}
+
+.spinnerWrap {
+    position: absolute;
+    top: 90px;
+    right: 58px;
+}
+

@@ -1,0 +1,207 @@
+.YourGenome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #27292d;
+}
+
+.header {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: left;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  font-weight: 100;
+  padding: 20px;
+  height: 56px;
+  background-color: #27292d;
+  color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.mainGenome {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    transition: height .2s ease-in-out;
+    overflow: auto;
+}
+
+.profileWindow {
+    padding: 24px 0 0 50px;
+    display: grid;
+    grid-auto-columns: 410px;
+    grid-auto-flow: column;
+    grid-gap: 50px;
+    margin: 0 auto;
+}
+
+.sectionWrap {
+    position: relative;
+    margin-top: 6px;
+    background-color: #27292d;
+    border-radius: 4px;
+    padding: 16px 16px;
+    min-height: calc(100% - 90px);
+    box-shadow: -2px -2px 6px #383b40, 6px 6px 6px rgba(0,0,0,.24);
+    margin-top: 80px;
+    margin-bottom: 50px;
+    padding-top: 100px;
+}
+
+.headingRow {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 26px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.profilePicture {
+  position: absolute;
+  top:0%;
+  left:50%;
+  transform: translateX(-50%) translateY(-35%);
+}
+
+.editProfile {
+  display: none;
+}
+
+.editProfile:hover {
+  position: absolute;
+  display: inline-block;
+  bottom: 5%;  
+  right: 28%;
+}
+
+.userPicture {
+  position: relative;
+  display: flex;
+  width: 150px;
+  height: 150px;
+  justify-content: center;
+  background-color: #383b40;
+  clip-path: polygon(45% 1.33975%, 46.5798% 0.60307%, 48.26352% 0.15192%, 50% 0%, 51.73648% 0.15192%, 53.4202% 0.60307%, 55% 1.33975%, 89.64102% 21.33975%, 91.06889% 22.33956%, 92.30146% 23.57212%, 93.30127% 25%, 94.03794% 26.5798%, 94.48909% 28.26352%, 94.64102% 30%, 94.64102% 70%, 94.48909% 71.73648%, 94.03794% 73.4202%, 93.30127% 75%, 92.30146% 76.42788%, 91.06889% 77.66044%, 89.64102% 78.66025%, 55% 98.66025%, 53.4202% 99.39693%, 51.73648% 99.84808%, 50% 100%, 48.26352% 99.84808%, 46.5798% 99.39693%, 45% 98.66025%, 10.35898% 78.66025%, 8.93111% 77.66044%, 7.69854% 76.42788%, 6.69873% 75%, 5.96206% 73.4202%, 5.51091% 71.73648%, 5.35898% 70%, 5.35898% 30%, 5.51091% 28.26352%, 5.96206% 26.5798%, 6.69873% 25%, 7.69854% 23.57212%, 8.93111% 22.33956%, 10.35898% 21.33975%);
+
+}
+
+.userPicture img {
+  margin: 0px 0;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  
+} 
+
+.userPicture:hover~.editProfile{
+  position: absolute;
+  display: inline-block;
+  bottom: 5%;  
+  right: 28%;
+}
+
+
+.dataRow {
+  margin: 20px 0;
+}
+
+.dataRow .itemName {
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 18px;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dataRow p {
+  height: 36px;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: 200;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 4px 0;
+}
+
+.buttonWrap {
+  display: flex;
+  justify-content: flex-end;
+  margin: 45px 0;
+}
+
+.editButton {
+  color: rgb(204, 220, 57);
+}
+
+
+/* Video Capture Window */
+.webcam {
+  width: 100%;
+  height: 100%;
+}
+
+.userName {
+    display: flex;
+    align-items: center;
+}
+
+.userName p {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: .05em;
+    line-height: 28px;
+}
+
+.bioSummary p {
+    letter-spacing: .05em;
+    line-height: 22px;
+}
+
+.bioSummary p::first-letter {
+    float: left;
+    font-size: 2.5em;
+    padding-top: .28em;
+    padding-right: .1em;
+}
+
+.checkIcon {
+    width: 24px;
+    padding-bottom: 10px;
+    margin-left: 8px;
+}
+
+.linksWrap{
+    margin-top: 90px;
+}
+
+.linksWrap a {
+    margin: 20px 20px 20px 0;
+}
+
+/* Profile column */
+
+.colHeading {
+    position: absolute;
+    top:-60px;
+}
+
+.colHeading p {
+    color: hsla(0,0%,100%,.6);
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.colHeading video {
+    margin-top: 15px;
+    padding-right: 13px;
+}
+
+.movieMake {
+    position: absolute;
+    top:0;
+    right:0;
+    border: 1px dotted #cddc39;
+    border-radius: 50%;
+}
