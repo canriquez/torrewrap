@@ -5,10 +5,6 @@ import NavMenu from '../components/NavMenu';
 import SignIn from './SignIn.js';
 import YourAccount from './YourAccount';
 import styles from '../styles/App.module.css';
-import VideoProfile from './VideoProfile';
-import EditProfileVideo from '../components/EditProfileVideo'
-import WebCamStreamCapture from '../components/WebCamStreamCapture';
-import EditVideoProfile from './EditVideoProfile';
 import YourGenome from '../containers/YourGenome'
 
 
