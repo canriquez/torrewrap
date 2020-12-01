@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Switch, Route, Redirect,
+} from 'react-router-dom';
 import NavMenu from '../components/NavMenu';
 import SignIn from './SignIn.js';
 import YourAccount from './YourAccount';
 import styles from '../styles/App.module.css';
-import YourGenome from '../containers/YourGenome'
-
+import YourGenome from './YourGenome';
 
 const App = ({
   userTorre,

@@ -8,7 +8,7 @@ const signUpTorreWrapApi = async ({
   picture_thumbnail,
 }) => {
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/signup';
   const a = `?name=${name}`;
   const b = `?public_id=${public_id}`;
@@ -38,7 +38,7 @@ const checkValidTorreUser = async ({ public_id }) => {
   console.log('I am at API torre');
   console.log({ public_id });
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/auth/person/';
   const a = `${public_id}`;
   const appURL = [baseUrl + endpoint + a];
@@ -70,7 +70,7 @@ const checkValidWrapUser = async ({ public_id }) => {
   console.log('I am at API Wrap User');
   console.log({ public_id });
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/auth/wrapuser/';
   const a = `${public_id}`;
   const appURL = [baseUrl + endpoint + a];
@@ -102,7 +102,7 @@ const signInWarpUser = async ({ public_id, password }) => {
   console.log('I am at API Wrap User');
   console.log({ public_id });
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/auth/login?';
   const a = `public_id=${public_id}`;
   const b = `&password=${password}`;
@@ -135,11 +135,11 @@ const signUpTorreUserApi = async ({ public_id, password }) => {
   console.log('I am at API Wrap User');
   console.log({ public_id });
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/signup?';
   const a = `public_id=${public_id}`;
   const b = `&password=${password}`;
-  const c = `&picture_thumbnail=http`
+  const c = '&picture_thumbnail=http';
   const appURL = [baseUrl + endpoint + a + b + c];
 
   console.log(appURL);
@@ -165,16 +165,18 @@ const signUpTorreUserApi = async ({ public_id, password }) => {
   }
 };
 
-const storeProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
+const storeProfileAssetApi = async ({
+  user, auth, asset_type, payload,
+}) => {
   console.log('I am at API StoreProfilePicture');
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/asset_upload?';
   const a = `user=${user}`;
   const b = `&auth=${auth}`;
   const c = `&asset_type=${asset_type}`;
   const d = `&payload=${payload}`;
-  const appURL = [baseUrl + endpoint + a + b + c ];
+  const appURL = [baseUrl + endpoint + a + b + c];
 
   console.log(appURL);
 
@@ -184,14 +186,14 @@ const storeProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({payload: payload})
+    body: JSON.stringify({ payload }),
   };
   try {
     const response = await fetch(appURL, request);
     console.log('this is the response I got');
     console.log(response);
     const obj = await response.json();
-    console.log('I just parsed Json')
+    console.log('I just parsed Json');
     console.log({ obj });
 
     // return complete list
@@ -201,15 +203,15 @@ const storeProfileAssetApi = async ({ user, auth, asset_type, payload }) => {
   }
 };
 
-const saveProfileAssetApi = async ({ user, auth, asset_type}) => {
+const saveProfileAssetApi = async ({ user, auth, asset_type }) => {
   console.log('I am at API StoreProfilePicture');
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/asset_save?';
   const a = `user=${user}`;
   const b = `&auth=${auth}`;
   const c = `&asset_type=${asset_type}`;
-  const appURL = [baseUrl + endpoint + a + b + c ];
+  const appURL = [baseUrl + endpoint + a + b + c];
 
   console.log(appURL);
 
@@ -218,7 +220,7 @@ const saveProfileAssetApi = async ({ user, auth, asset_type}) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      "Access-Control-Allow-Credentials" : true,
+      'Access-Control-Allow-Credentials': true,
     },
   };
   try {
@@ -235,15 +237,17 @@ const saveProfileAssetApi = async ({ user, auth, asset_type}) => {
   }
 };
 
-const clearProfileAssetApi = async ({ user, auth, asset_type, cloud_url}) => {
+const clearProfileAssetApi = async ({
+  user, auth, asset_type, cloud_url,
+}) => {
   console.log('I am at API StoreProfilePicture');
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/asset_delete?';
   const a = `user=${user}`;
   const b = `&auth=${auth}`;
   const c = `&asset_type=${asset_type}`;
-  const d = `&cloud_url=${cloud_url};`
+  const d = `&cloud_url=${cloud_url};`;
   const appURL = [baseUrl + endpoint + a + b + c + d];
 
   console.log(appURL);
@@ -269,15 +273,15 @@ const clearProfileAssetApi = async ({ user, auth, asset_type, cloud_url}) => {
   }
 };
 
-const refreshProfileApi = async ({ user, auth}) => {
+const refreshProfileApi = async ({ user, auth }) => {
   console.log('I am at API StoreProfilePicture');
   const baseUrl = 'https://torrewrap-api.herokuapp.com'; // Provided bio endpoint
-  //const baseUrl = 'http://127.0.0.1:5000';
+  // const baseUrl = 'http://127.0.0.1:5000';
   const endpoint = '/asset_delete?';
   const a = `user=${user}`;
   const b = `&auth=${auth}`;
 
-  const appURL = [baseUrl + endpoint + a + b ];
+  const appURL = [baseUrl + endpoint + a + b];
 
   console.log(appURL);
 
@@ -303,13 +307,13 @@ const refreshProfileApi = async ({ user, auth}) => {
 };
 
 export {
-  signUpTorreWrapApi, 
-  checkValidTorreUser, 
-  checkValidWrapUser, 
-  signInWarpUser, 
+  signUpTorreWrapApi,
+  checkValidTorreUser,
+  checkValidWrapUser,
+  signInWarpUser,
   signUpTorreUserApi,
   storeProfileAssetApi,
   saveProfileAssetApi,
   clearProfileAssetApi,
-  refreshProfileApi
+  refreshProfileApi,
 };
