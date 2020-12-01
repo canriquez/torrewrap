@@ -5,15 +5,15 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import styles from '../styles/EditProfileVideo.module.css';
-import {
-  pushProfileAsset, saveProfileAsset, updateTorreUserDetails, clearProfileAsset,
-} from '../actions/index';
 import WebCamStreamCapture from './WebCamStreamCapture';
 import { blobToBase64 } from '../helpers/componentHelp';
 import UploadImageButtons from './UploadImageButtons';
 import VideoPlayer from './VideoPlayer';
 import BootstrapButton from './BootstrapButton';
 import Spinner from './Spinner';
+import {
+  pushProfileAsset, saveProfileAsset, updateTorreUserDetails, clearProfileAsset,
+} from '../actions/index';
 
 const useStyles = makeStyles(theme => ({
   modal: {
