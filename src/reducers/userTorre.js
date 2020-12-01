@@ -9,7 +9,7 @@ const state_default = {
   signedIn: false,
   valid: false,
   inWrapDB: false,
-  createUser:'',
+  createUser: '',
   persona: {},
   picture_thumbnail: '',
   draft_thumbnail: undefined,
@@ -17,9 +17,9 @@ const state_default = {
   draft_video: undefined,
   savedProfileAsset: false,
   torre_data: {
-    location: {name:''},
-    links:[{address:''},{address:''},{address:''},{address:''}]
-  }
+    location: { name: '' },
+    links: [{ address: '' }, { address: '' }, { address: '' }, { address: '' }],
+  },
 };
 
 const userTorre = (state = state_default, action) => {

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styles from '../styles/SignIn.module.css';
-import { validatesTorreUserApi, validatesWrapUserApi, signInWrapUserApi, signUpTorreUser, updateTorreUserDetails } from '../actions/index';
+import {
+  validatesTorreUserApi, validatesWrapUserApi, signInWrapUserApi, signUpTorreUser, updateTorreUserDetails,
+} from '../actions/index';
 import BootstrapButton from '../components/BootstrapButton';
-import Spinner from '../components/Spinner'
-
+import Spinner from '../components/Spinner';
 
 const SignIn = ({
   validatesTorreUser,
@@ -46,19 +47,19 @@ const SignIn = ({
   const handleSignUp = () => {
     if (passOne === passTwo) {
       signUpUser(torreUser, passOne);
-    }else{
+    } else {
       console.log('passwords do not match');
     }
-  }
+  };
 
-  const handleBack = ()=> {
+  const handleBack = () => {
 
-  }
+  };
 
   useEffect(() => {
     console.log('at use effect');
     console.log({ userTorre });
-    if (torreUser !='' && !userTorre.inWrapDB) {
+    if (torreUser != '' && !userTorre.inWrapDB) {
       console.log('about to check wrap user');
       checkValidWrapUser(torreUser);
     }
@@ -86,7 +87,7 @@ const SignIn = ({
             <BootstrapButton onClick={handleTorreUserCheck} href="#contained-buttons" className={styles.signInButton}>
               Continue
             </BootstrapButton>
-            {userTorre.fetching=='busy' ? <Spinner /> : ''}
+            {userTorre.fetching == 'busy' ? <Spinner /> : ''}
           </div>
         </div>
       </div>
@@ -95,42 +96,45 @@ const SignIn = ({
 
   const renderSignUp = () => (
     <div className={styles.signIn}>
-      <div className={styles.header}>Valid Torre.co username: {torreUser}</div>
+      <div className={styles.header}>
+        Valid Torre.co username:
+        {torreUser}
+      </div>
       <div className={styles.profileWindow}>
 
         <div className={styles.profileWrap}>
-        <form action="#">
-          <label htmlFor="torreUser">Add your TorreWrap password, and Go!</label>
-          <div className={styles.torreUserInputWrap}>
-            <input
-              className={styles.torreUser}
-              type="password"
-              onChange={handlePassOneChange}
-              value={passOne}
-              id="inputuser"
-              autoComplete="Type your torreWrap Password"
-            />
-          </div>
-          <div className={styles.torreUserInputWrap}>
-            <input
-              className={styles.torreUser}
-              type="password"
-              onChange={handlePassTwoChange}
-              value={passTwo}
-              id="inputuser"
-              autoComplete="Type your torreWrap Password"
-            />
-          </div>
+          <form action="#">
+            <label htmlFor="torreUser">Add your TorreWrap password, and Go!</label>
+            <div className={styles.torreUserInputWrap}>
+              <input
+                className={styles.torreUser}
+                type="password"
+                onChange={handlePassOneChange}
+                value={passOne}
+                id="inputuser"
+                autoComplete="Type your torreWrap Password"
+              />
+            </div>
+            <div className={styles.torreUserInputWrap}>
+              <input
+                className={styles.torreUser}
+                type="password"
+                onChange={handlePassTwoChange}
+                value={passTwo}
+                id="inputuser"
+                autoComplete="Type your torreWrap Password"
+              />
+            </div>
 
-          <div className={styles.buttonWrap}>
-            <BootstrapButton onClick={handleBack} href="#contained-buttons" className={styles.backButton}>
-              Back
-            </BootstrapButton>
-            {userTorre.fetching=='busy' ? <Spinner poss="spinCentered" /> : '' }
-            <BootstrapButton onClick={handleSignUp} href="#contained-buttons" className={styles.signInButton}>
-              Signup
-            </BootstrapButton>
-          </div>
+            <div className={styles.buttonWrap}>
+              <BootstrapButton onClick={handleBack} href="#contained-buttons" className={styles.backButton}>
+                Back
+              </BootstrapButton>
+              {userTorre.fetching == 'busy' ? <Spinner poss="spinCentered" /> : '' }
+              <BootstrapButton onClick={handleSignUp} href="#contained-buttons" className={styles.signInButton}>
+                Signup
+              </BootstrapButton>
+            </div>
           </form>
         </div>
       </div>
@@ -158,7 +162,7 @@ const SignIn = ({
             <BootstrapButton onClick={handleSignIn} href="#contained-buttons" className={styles.signInButton}>
               SIGN IN
             </BootstrapButton>
-            {userTorre.fetching=='busy' ? <Spinner /> : ''}
+            {userTorre.fetching == 'busy' ? <Spinner /> : ''}
           </div>
         </div>
       </div>
@@ -169,7 +173,7 @@ const SignIn = ({
     <div>
       <div>{!userTorre.valid ? renderSignIn() : <p />}</div>
       <div>{userTorre.inWrapDB && !userTorre.signIn ? renderLogIn() : <p />}</div>
-      <div>{userTorre.createUser == torreUser && !userTorre.inWrapDB && torreUser !='' ? renderSignUp() : <p />}</div>
+      <div>{userTorre.createUser == torreUser && !userTorre.inWrapDB && torreUser != '' ? renderSignUp() : <p />}</div>
       {userTorre.signedIn ? <Redirect to="/" /> : ''}
 
     </div>

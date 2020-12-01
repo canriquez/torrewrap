@@ -12,9 +12,9 @@ import { USER_RECORD } from '../helpers/help';
 const NavMenu = ({
   userTorre,
   updateUserTorreData,
-  refreshTorreData
+  refreshTorreData,
 }) => {
-  const {video_url,picture_thumbnail} = userTorre
+  const { video_url, picture_thumbnail } = userTorre;
   useEffect(() => {
     if (window.localStorage.hasOwnProperty(USER_RECORD)) {
       console.log('YES, WE ARE LOGGED IN');
@@ -43,7 +43,7 @@ const NavMenu = ({
       cloud_url: undefined,
       draft_video: undefined,
       savedProfileVideo: false,
-      video_url: undefined
+      video_url: undefined,
     });
   };
 
@@ -59,7 +59,7 @@ const NavMenu = ({
           <SearchIcon fontSize="medium" className={styles.menuIcon} />
           <p>Search</p>
         </div>
-        <RouterLink to={'/genome'} >
+        <RouterLink to="/genome">
           <div className={styles.menuBox}>
             <PersonIcon fontSize="medium" className={styles.menuIcon} />
             <p>Your genome</p>
@@ -92,8 +92,8 @@ const mapDispatchToProps = dispach => ({
     dispach(updateTorreUserDetails(data));
   },
   refreshTorreData: refreshObject => {
-    dispach(refreshProfile(refreshObject))
-  }
+    dispach(refreshProfile(refreshObject));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavMenu);

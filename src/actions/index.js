@@ -1,10 +1,10 @@
 import { UPDATE_USERAPI_DETAILS, UPDATE_USERTORRE_DETAILS, USER_RECORD } from '../helpers/help';
-import { 
-  checkValidTorreUser, 
-  checkValidWrapUser, 
-  signInWarpUser, 
-  signUpTorreUserApi, 
-  storeProfileAssetApi, 
+import {
+  checkValidTorreUser,
+  checkValidWrapUser,
+  signInWarpUser,
+  signUpTorreUserApi,
+  storeProfileAssetApi,
   saveProfileAssetApi,
   clearProfileAssetApi,
   refreshProfileApi,
@@ -100,7 +100,6 @@ const signInWrapUserApi = (userTorre, password) => (dispatch, getState) => {
     });
 };
 
-
 const signUpTorreUser = (userTorre, password) => (dispatch, getState) => {
   dispatch(updateTorreUserDetails({ fetching: 'busy' }));
   return signUpTorreUserApi(
@@ -130,54 +129,53 @@ const signUpTorreUser = (userTorre, password) => (dispatch, getState) => {
     });
 };
 
-const pushProfileAsset = (assetObject) => (dispatch, getState) => {
+const pushProfileAsset = assetObject => (dispatch, getState) => {
   dispatch(updateTorreUserDetails({ uploading: 'busy' }));
   return storeProfileAssetApi(assetObject)
     .then(result => {
-      let settings = {}
+      let settings = {};
       if (assetObject.asset_type === 'image') {
-        settings = { 
+        settings = {
           uploading: 'idle',
-          draft_thumbnail: result.asset.cloud_url
-          }
-        }
+          draft_thumbnail: result.asset.cloud_url,
+        };
+      }
       if (assetObject.asset_type === 'video') {
-        settings = { 
+        settings = {
           uploading: 'idle',
-          draft_video: result.asset.cloud_url.replace('mkv','mp4')
-          }
-        }
+          draft_video: result.asset.cloud_url.replace('mkv', 'mp4'),
+        };
+      }
       dispatch(updateTorreUserDetails(
-        settings
+        settings,
       ));
-
     }).catch(error => {
       dispatch(updateTorreUserDetails({ uploading: 'error' }));
       throw (error);
     });
 };
 
-const saveProfileAsset = (assetObject) => (dispatch, getState) => {
+const saveProfileAsset = assetObject => (dispatch, getState) => {
   dispatch(updateTorreUserDetails({ uploading: 'busy' }));
   return saveProfileAssetApi(assetObject)
     .then(result => {
-      let settings = {}
+      let settings = {};
       if (assetObject.asset_type === 'image') {
-        settings = { 
+        settings = {
           uploading: 'idle',
           picture_thumbnail: result.picture_thumbnail,
-          savedProfileAsset: true
-          }
-        }
+          savedProfileAsset: true,
+        };
+      }
       if (assetObject.asset_type === 'video') {
-        settings = { 
+        settings = {
           uploading: 'idle',
-          video_url: result.video_url.replace('mkv','mp4'),
-          savedProfileAsset: true
-          }
-        }
+          video_url: result.video_url.replace('mkv', 'mp4'),
+          savedProfileAsset: true,
+        };
+      }
       dispatch(updateTorreUserDetails(
-        settings
+        settings,
       ));
     }).catch(error => {
       dispatch(updateTorreUserDetails({ uploading: 'error' }));
@@ -185,35 +183,34 @@ const saveProfileAsset = (assetObject) => (dispatch, getState) => {
     });
 };
 
-const clearProfileAsset = (assetObject) => (dispatch, getState) => {
+const clearProfileAsset = assetObject => (dispatch, getState) => {
   dispatch(updateTorreUserDetails({ uploading: 'busy' }));
   return clearProfileAssetApi(assetObject)
     .then(result => {
-      let settings = {}
+      let settings = {};
       if (assetObject.asset_type === 'image') {
-        settings = { 
+        settings = {
           uploading: 'idle',
           picture_thumbnail: result.picture_thumbnail,
-          savedProfilePicture: true
-          }
-        }
+          savedProfilePicture: true,
+        };
+      }
       if (assetObject.asset_type === 'video') {
-        settings = { 
+        settings = {
           uploading: 'idle',
-          video_url: result.video_url
-          }
-        }
+          video_url: result.video_url,
+        };
+      }
       dispatch(updateTorreUserDetails(
-        settings
+        settings,
       ));
-
     }).catch(error => {
       dispatch(updateTorreUserDetails({ uploading: 'error' }));
       throw (error);
     });
 };
 
-const refreshProfile = (refreshObject) => (dispatch, getState) => {
+const refreshProfile = refreshObject => (dispatch, getState) => {
   dispatch(updateTorreUserDetails({ fetching: 'busy' }));
   return refreshProfileApi(refreshObject)
     .then(result => {
@@ -236,7 +233,6 @@ const refreshProfile = (refreshObject) => (dispatch, getState) => {
       throw (error);
     });
 };
-
 
 export {
   updateuserDetails,
