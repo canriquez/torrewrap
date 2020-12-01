@@ -20,14 +20,14 @@ const updateTorreUserDetails = userTorre => ({
   userTorre,
 });
 
-const validatesTorreUserApi = userTorre => (dispatch, getState) => {
+const validatesTorreUserApi = userTorre => dispatch => {
   dispatch(updateTorreUserDetails({ fetching: 'busy' }));
   return checkValidTorreUser(
     { public_id: userTorre },
   )
     .then(result => {
       dispatch(updateTorreUserDetails({ fetching: 'idle' }));
-      if (result.message == 'Valid Torre.co User') {
+      if (result.message === 'Valid Torre.co User') {
         dispatch(updateTorreUserDetails({
           valid: true,
           errors: [],
@@ -44,14 +44,14 @@ const validatesTorreUserApi = userTorre => (dispatch, getState) => {
     });
 };
 
-const validatesWrapUserApi = userTorre => (dispatch, getState) => {
+const validatesWrapUserApi = userTorre => dispatch => {
   dispatch(updateTorreUserDetails({ fetching: 'busy' }));
   return checkValidWrapUser(
     { public_id: userTorre },
   )
     .then(result => {
       dispatch(updateTorreUserDetails({ fetching: 'idle' }));
-      if (result.message == 'Valid TorreWrap User') {
+      if (result.message === 'Valid TorreWrap User') {
         dispatch(updateTorreUserDetails({
           inWrapDB: true,
           errors: [],
@@ -71,7 +71,7 @@ const validatesWrapUserApi = userTorre => (dispatch, getState) => {
     });
 };
 
-const signInWrapUserApi = (userTorre, password) => (dispatch, getState) => {
+const signInWrapUserApi = (userTorre, password) => dispatch => {
   dispatch(updateTorreUserDetails({ fetching: 'busy' }));
   return signInWarpUser(
     {
@@ -100,7 +100,7 @@ const signInWrapUserApi = (userTorre, password) => (dispatch, getState) => {
     });
 };
 
-const signUpTorreUser = (userTorre, password) => (dispatch, getState) => {
+const signUpTorreUser = (userTorre, password) => dispatch => {
   dispatch(updateTorreUserDetails({ fetching: 'busy' }));
   return signUpTorreUserApi(
     {
@@ -129,7 +129,7 @@ const signUpTorreUser = (userTorre, password) => (dispatch, getState) => {
     });
 };
 
-const pushProfileAsset = assetObject => (dispatch, getState) => {
+const pushProfileAsset = assetObject => dispatch => {
   dispatch(updateTorreUserDetails({ uploading: 'busy' }));
   return storeProfileAssetApi(assetObject)
     .then(result => {
@@ -155,7 +155,7 @@ const pushProfileAsset = assetObject => (dispatch, getState) => {
     });
 };
 
-const saveProfileAsset = assetObject => (dispatch, getState) => {
+const saveProfileAsset = assetObject => dispatch => {
   dispatch(updateTorreUserDetails({ uploading: 'busy' }));
   return saveProfileAssetApi(assetObject)
     .then(result => {
@@ -183,7 +183,7 @@ const saveProfileAsset = assetObject => (dispatch, getState) => {
     });
 };
 
-const clearProfileAsset = assetObject => (dispatch, getState) => {
+const clearProfileAsset = assetObject => dispatch => {
   dispatch(updateTorreUserDetails({ uploading: 'busy' }));
   return clearProfileAssetApi(assetObject)
     .then(result => {
@@ -210,7 +210,7 @@ const clearProfileAsset = assetObject => (dispatch, getState) => {
     });
 };
 
-const refreshProfile = refreshObject => (dispatch, getState) => {
+const refreshProfile = refreshObject => dispatch => {
   dispatch(updateTorreUserDetails({ fetching: 'busy' }));
   return refreshProfileApi(refreshObject)
     .then(result => {
